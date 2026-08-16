@@ -85,7 +85,6 @@ const tools = [
 ] as const;
 
 function Home() {
-  const featured = recipes[0];
   return (
     <>
       <Hero />
@@ -102,7 +101,6 @@ function Home() {
       <InstagramGrid />
       <FinalCta />
       <Newsletter />
-      <span className="sr-only">{featured.title}</span>
     </>
   );
 }
@@ -248,7 +246,7 @@ function AiKitchen() {
 }
 
 function Featured() {
-  const r = recipes[0];
+  const r = recipes[0]!;
   return (
     <section className="container-page py-20 md:py-28">
       <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">

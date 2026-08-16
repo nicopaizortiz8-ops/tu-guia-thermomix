@@ -11,10 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LivesRouteImport } from './routes/lives'
+import { Route as MiCocinaRouteImport } from './routes/mi-cocina'
+import { Route as PlusRouteImport } from './routes/plus'
+import { Route as SobreMiRouteImport } from './routes/sobre-mi'
+import { Route as ThermomixRouteImport } from './routes/thermomix'
 import { Route as AiKitchenIndexRouteImport } from './routes/ai-kitchen.index'
 import { Route as AiKitchenAhorroRouteImport } from './routes/ai-kitchen.ahorro'
 import { Route as AiKitchenCrearRecetaRouteImport } from './routes/ai-kitchen.crear-receta'
 import { Route as AiKitchenHazloEnCasaRouteImport } from './routes/ai-kitchen.hazlo-en-casa'
+import { Route as AiKitchenPlanSemanalRouteImport } from './routes/ai-kitchen.plan-semanal'
+import { Route as AiKitchenPreguntameRouteImport } from './routes/ai-kitchen.preguntame'
+import { Route as AiKitchenTiempoRouteImport } from './routes/ai-kitchen.tiempo'
 import { Route as RecetasIndexRouteImport } from './routes/recetas.index'
 import { Route as RecetasSlugRouteImport } from './routes/recetas.$slug'
 
@@ -26,6 +33,26 @@ const IndexRoute = IndexRouteImport.update({
 const LivesRoute = LivesRouteImport.update({
   id: '/lives',
   path: '/lives',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MiCocinaRoute = MiCocinaRouteImport.update({
+  id: '/mi-cocina',
+  path: '/mi-cocina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlusRoute = PlusRouteImport.update({
+  id: '/plus',
+  path: '/plus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreMiRoute = SobreMiRouteImport.update({
+  id: '/sobre-mi',
+  path: '/sobre-mi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThermomixRoute = ThermomixRouteImport.update({
+  id: '/thermomix',
+  path: '/thermomix',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AiKitchenIndexRoute = AiKitchenIndexRouteImport.update({
@@ -48,6 +75,21 @@ const AiKitchenHazloEnCasaRoute = AiKitchenHazloEnCasaRouteImport.update({
   path: '/ai-kitchen/hazlo-en-casa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiKitchenPlanSemanalRoute = AiKitchenPlanSemanalRouteImport.update({
+  id: '/ai-kitchen/plan-semanal',
+  path: '/ai-kitchen/plan-semanal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiKitchenPreguntameRoute = AiKitchenPreguntameRouteImport.update({
+  id: '/ai-kitchen/preguntame',
+  path: '/ai-kitchen/preguntame',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiKitchenTiempoRoute = AiKitchenTiempoRouteImport.update({
+  id: '/ai-kitchen/tiempo',
+  path: '/ai-kitchen/tiempo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RecetasIndexRoute = RecetasIndexRouteImport.update({
   id: '/recetas/',
   path: '/recetas/',
@@ -62,9 +104,16 @@ const RecetasSlugRoute = RecetasSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/lives': typeof LivesRoute
+  '/mi-cocina': typeof MiCocinaRoute
+  '/plus': typeof PlusRoute
+  '/sobre-mi': typeof SobreMiRoute
+  '/thermomix': typeof ThermomixRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
+  '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
+  '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
   '/recetas/': typeof RecetasIndexRoute
@@ -72,9 +121,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/lives': typeof LivesRoute
+  '/mi-cocina': typeof MiCocinaRoute
+  '/plus': typeof PlusRoute
+  '/sobre-mi': typeof SobreMiRoute
+  '/thermomix': typeof ThermomixRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
+  '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
+  '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen': typeof AiKitchenIndexRoute
   '/recetas': typeof RecetasIndexRoute
@@ -83,9 +139,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/lives': typeof LivesRoute
+  '/mi-cocina': typeof MiCocinaRoute
+  '/plus': typeof PlusRoute
+  '/sobre-mi': typeof SobreMiRoute
+  '/thermomix': typeof ThermomixRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
+  '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
+  '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
   '/recetas/': typeof RecetasIndexRoute
@@ -95,9 +158,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/lives'
+    | '/mi-cocina'
+    | '/plus'
+    | '/sobre-mi'
+    | '/thermomix'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/ai-kitchen/plan-semanal'
+    | '/ai-kitchen/preguntame'
+    | '/ai-kitchen/tiempo'
     | '/recetas/$slug'
     | '/ai-kitchen/'
     | '/recetas/'
@@ -105,9 +175,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/lives'
+    | '/mi-cocina'
+    | '/plus'
+    | '/sobre-mi'
+    | '/thermomix'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/ai-kitchen/plan-semanal'
+    | '/ai-kitchen/preguntame'
+    | '/ai-kitchen/tiempo'
     | '/recetas/$slug'
     | '/ai-kitchen'
     | '/recetas'
@@ -115,9 +192,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/lives'
+    | '/mi-cocina'
+    | '/plus'
+    | '/sobre-mi'
+    | '/thermomix'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/ai-kitchen/plan-semanal'
+    | '/ai-kitchen/preguntame'
+    | '/ai-kitchen/tiempo'
     | '/recetas/$slug'
     | '/ai-kitchen/'
     | '/recetas/'
@@ -126,9 +210,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LivesRoute: typeof LivesRoute
+  MiCocinaRoute: typeof MiCocinaRoute
+  PlusRoute: typeof PlusRoute
+  SobreMiRoute: typeof SobreMiRoute
+  ThermomixRoute: typeof ThermomixRoute
   AiKitchenAhorroRoute: typeof AiKitchenAhorroRoute
   AiKitchenCrearRecetaRoute: typeof AiKitchenCrearRecetaRoute
   AiKitchenHazloEnCasaRoute: typeof AiKitchenHazloEnCasaRoute
+  AiKitchenPlanSemanalRoute: typeof AiKitchenPlanSemanalRoute
+  AiKitchenPreguntameRoute: typeof AiKitchenPreguntameRoute
+  AiKitchenTiempoRoute: typeof AiKitchenTiempoRoute
   RecetasSlugRoute: typeof RecetasSlugRoute
   AiKitchenIndexRoute: typeof AiKitchenIndexRoute
   RecetasIndexRoute: typeof RecetasIndexRoute
@@ -148,6 +239,34 @@ declare module '@tanstack/react-router' {
       path: '/lives'
       fullPath: '/lives'
       preLoaderRoute: typeof LivesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mi-cocina': {
+      id: '/mi-cocina'
+      path: '/mi-cocina'
+      fullPath: '/mi-cocina'
+      preLoaderRoute: typeof MiCocinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plus': {
+      id: '/plus'
+      path: '/plus'
+      fullPath: '/plus'
+      preLoaderRoute: typeof PlusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre-mi': {
+      id: '/sobre-mi'
+      path: '/sobre-mi'
+      fullPath: '/sobre-mi'
+      preLoaderRoute: typeof SobreMiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thermomix': {
+      id: '/thermomix'
+      path: '/thermomix'
+      fullPath: '/thermomix'
+      preLoaderRoute: typeof ThermomixRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai-kitchen/': {
@@ -178,6 +297,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiKitchenHazloEnCasaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-kitchen/plan-semanal': {
+      id: '/ai-kitchen/plan-semanal'
+      path: '/ai-kitchen/plan-semanal'
+      fullPath: '/ai-kitchen/plan-semanal'
+      preLoaderRoute: typeof AiKitchenPlanSemanalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-kitchen/preguntame': {
+      id: '/ai-kitchen/preguntame'
+      path: '/ai-kitchen/preguntame'
+      fullPath: '/ai-kitchen/preguntame'
+      preLoaderRoute: typeof AiKitchenPreguntameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-kitchen/tiempo': {
+      id: '/ai-kitchen/tiempo'
+      path: '/ai-kitchen/tiempo'
+      fullPath: '/ai-kitchen/tiempo'
+      preLoaderRoute: typeof AiKitchenTiempoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recetas/': {
       id: '/recetas/'
       path: '/recetas'
@@ -198,9 +338,16 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LivesRoute: LivesRoute,
+  MiCocinaRoute: MiCocinaRoute,
+  PlusRoute: PlusRoute,
+  SobreMiRoute: SobreMiRoute,
+  ThermomixRoute: ThermomixRoute,
   AiKitchenAhorroRoute: AiKitchenAhorroRoute,
   AiKitchenCrearRecetaRoute: AiKitchenCrearRecetaRoute,
   AiKitchenHazloEnCasaRoute: AiKitchenHazloEnCasaRoute,
+  AiKitchenPlanSemanalRoute: AiKitchenPlanSemanalRoute,
+  AiKitchenPreguntameRoute: AiKitchenPreguntameRoute,
+  AiKitchenTiempoRoute: AiKitchenTiempoRoute,
   RecetasSlugRoute: RecetasSlugRoute,
   AiKitchenIndexRoute: AiKitchenIndexRoute,
   RecetasIndexRoute: RecetasIndexRoute,
