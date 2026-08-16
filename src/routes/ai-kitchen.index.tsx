@@ -11,7 +11,7 @@ import {
 import { SectionHeading, UsageMeter } from "@/components/site/ui-bits";
 import { track } from "@/lib/site";
 
-export const Route = createFileRoute("/ai-kitchen")({
+export const Route = createFileRoute("/ai-kitchen/")({
   head: () => ({
     meta: [
       { title: "AI Kitchen — Herramientas para cocinar mejor | Yo Uso Thermomix" },
