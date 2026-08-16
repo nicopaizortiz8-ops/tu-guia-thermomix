@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { categories, recipes } from "@/data/recipes";
 import { Chip, RecipeCard, SectionHeading } from "@/components/site/ui-bits";
 
-export const Route = createFileRoute("/recetas")({
+export const Route = createFileRoute("/recetas/")({
   head: () => ({
     meta: [
       { title: "Recetas para disfrutar | Yo Uso Thermomix" },

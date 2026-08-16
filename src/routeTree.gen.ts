@@ -10,14 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LivesRouteImport } from './routes/lives'
 import { Route as AiKitchenIndexRouteImport } from './routes/ai-kitchen.index'
 import { Route as AiKitchenAhorroRouteImport } from './routes/ai-kitchen.ahorro'
 import { Route as AiKitchenCrearRecetaRouteImport } from './routes/ai-kitchen.crear-receta'
 import { Route as AiKitchenHazloEnCasaRouteImport } from './routes/ai-kitchen.hazlo-en-casa'
+import { Route as RecetasIndexRouteImport } from './routes/recetas.index'
+import { Route as RecetasSlugRouteImport } from './routes/recetas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivesRoute = LivesRouteImport.update({
+  id: '/lives',
+  path: '/lives',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AiKitchenIndexRoute = AiKitchenIndexRouteImport.update({
@@ -40,59 +48,90 @@ const AiKitchenHazloEnCasaRoute = AiKitchenHazloEnCasaRouteImport.update({
   path: '/ai-kitchen/hazlo-en-casa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RecetasIndexRoute = RecetasIndexRouteImport.update({
+  id: '/recetas/',
+  path: '/recetas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecetasSlugRoute = RecetasSlugRouteImport.update({
+  id: '/recetas/$slug',
+  path: '/recetas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lives': typeof LivesRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
+  '/recetas/': typeof RecetasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/lives': typeof LivesRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen': typeof AiKitchenIndexRoute
+  '/recetas': typeof RecetasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lives': typeof LivesRoute
   '/ai-kitchen/ahorro': typeof AiKitchenAhorroRoute
   '/ai-kitchen/crear-receta': typeof AiKitchenCrearRecetaRoute
   '/ai-kitchen/hazlo-en-casa': typeof AiKitchenHazloEnCasaRoute
+  '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
+  '/recetas/': typeof RecetasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/lives'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/recetas/$slug'
     | '/ai-kitchen/'
+    | '/recetas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/lives'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/recetas/$slug'
     | '/ai-kitchen'
+    | '/recetas'
   id:
     | '__root__'
     | '/'
+    | '/lives'
     | '/ai-kitchen/ahorro'
     | '/ai-kitchen/crear-receta'
     | '/ai-kitchen/hazlo-en-casa'
+    | '/recetas/$slug'
     | '/ai-kitchen/'
+    | '/recetas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LivesRoute: typeof LivesRoute
   AiKitchenAhorroRoute: typeof AiKitchenAhorroRoute
   AiKitchenCrearRecetaRoute: typeof AiKitchenCrearRecetaRoute
   AiKitchenHazloEnCasaRoute: typeof AiKitchenHazloEnCasaRoute
+  RecetasSlugRoute: typeof RecetasSlugRoute
   AiKitchenIndexRoute: typeof AiKitchenIndexRoute
+  RecetasIndexRoute: typeof RecetasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lives': {
+      id: '/lives'
+      path: '/lives'
+      fullPath: '/lives'
+      preLoaderRoute: typeof LivesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai-kitchen/': {
@@ -132,15 +178,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiKitchenHazloEnCasaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recetas/': {
+      id: '/recetas/'
+      path: '/recetas'
+      fullPath: '/recetas/'
+      preLoaderRoute: typeof RecetasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recetas/$slug': {
+      id: '/recetas/$slug'
+      path: '/recetas/$slug'
+      fullPath: '/recetas/$slug'
+      preLoaderRoute: typeof RecetasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LivesRoute: LivesRoute,
   AiKitchenAhorroRoute: AiKitchenAhorroRoute,
   AiKitchenCrearRecetaRoute: AiKitchenCrearRecetaRoute,
   AiKitchenHazloEnCasaRoute: AiKitchenHazloEnCasaRoute,
+  RecetasSlugRoute: RecetasSlugRoute,
   AiKitchenIndexRoute: AiKitchenIndexRoute,
+  RecetasIndexRoute: RecetasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
