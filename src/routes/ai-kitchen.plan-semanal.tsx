@@ -48,7 +48,7 @@ function PlanSemanal() {
         to="/ai-kitchen"
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="size-4" /> AI Kitchen
+        <ArrowLeft className="size-4" /> ¿Qué cocinamos?
       </Link>
       <h1 className="mt-6 text-3xl md:text-[2.6rem]">Planea mi semana</h1>
       <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/plus")({
       {
         name: "description",
         content:
-          "Más generaciones en AI Kitchen, planificación semanal, recetas exclusivas e historial. Próximamente.",
+          "Más ideas cada mes, planificación semanal, recetas exclusivas e historial. Próximamente.",
       },
       { property: "og:title", content: "Club Yo Uso" },
       { property: "og:description", content: "Cocina más. Planea menos. Próximamente." },
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/plus")({
 });
 
 const gratis = [
-  "Generaciones limitadas de AI Kitchen",
+  "Ideas limitadas cada mes",
   "Recetas básicas",
   "Calculadora de ahorro",
   "Lives",

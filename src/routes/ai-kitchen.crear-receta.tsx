@@ -51,7 +51,7 @@ function CrearReceta() {
         to="/ai-kitchen"
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="size-4" /> AI Kitchen
+        <ArrowLeft className="size-4" /> ¿Qué cocinamos?
       </Link>
 
       <div className="mt-6 flex flex-wrap items-end justify-between gap-4">

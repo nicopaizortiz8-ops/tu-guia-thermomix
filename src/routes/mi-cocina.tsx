@@ -10,7 +10,7 @@ export const Route = createFileRoute("/mi-cocina")({
       {
         name: "description",
         content:
-          "Tu espacio personal: recetas guardadas, planes semanales, listas de compras e historial de AI Kitchen.",
+          "Tu espacio personal: recetas guardadas, planes semanales, listas de compras e historial de ideas inteligentes.",
       },
       { property: "og:title", content: "Mi Cocina | Yo Uso Thermomix" },
       { property: "og:description", content: "Tus recetas guardadas y tus planes de la semana." },
@@ -23,7 +23,7 @@ const secciones = [
   { icon: Heart, label: "Mis recetas" },
   { icon: CalendarDays, label: "Mis semanas" },
   { icon: ShoppingCart, label: "Mis listas" },
-  { icon: Sparkles, label: "Historial de AI Kitchen" },
+  { icon: Sparkles, label: "Historial de ideas" },
   { icon: Settings, label: "Preferencias" },
 ];
 
