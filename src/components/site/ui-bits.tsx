@@ -10,10 +10,10 @@ export function Label({
   className,
   tone = "muted",
 }: {
-  index?: string;
+  index?: string | undefined;
   children: ReactNode;
-  className?: string;
-  tone?: "muted" | "champagne" | "light";
+  className?: string | undefined;
+  tone?: "muted" | "champagne" | "light" | undefined;
 }) {
   return (
     <p
@@ -43,13 +43,13 @@ export function SectionHeading({
   className,
   aside,
 }: {
-  eyebrow?: string;
-  index?: string;
+  eyebrow?: string | undefined;
+  index?: string | undefined;
   title: ReactNode;
   description?: ReactNode;
   align?: "left" | "center";
   tone?: "dark" | "light";
-  className?: string;
+  className?: string | undefined;
   aside?: ReactNode;
 }) {
   return (
@@ -345,3 +345,6 @@ export function AnimatedNumber({
 
   return <span className={className}>{format(shown)}</span>;
 }
+
+/** @deprecated customer-facing copy now uses IdeasMeter. */
+export const UsageMeter = IdeasMeter;
