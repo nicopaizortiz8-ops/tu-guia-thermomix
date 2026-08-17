@@ -8,27 +8,28 @@ type Props = {
   extra?: string;
   children?: ReactNode;
   className?: string;
-  variant?: "solid" | "outline" | "ghost";
+  variant?: "solid" | "outline" | "ghost" | "light";
   size?: "sm" | "md" | "lg";
   showIcon?: boolean;
 };
 
 const variants = {
-  solid: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft",
-  outline: "border border-border bg-card text-foreground hover:bg-secondary",
-  ghost: "text-foreground hover:bg-secondary",
+  solid: "bg-ink text-warm-white hover:bg-espresso",
+  light: "bg-warm-white text-ink hover:bg-ivory",
+  outline: "border border-ink/25 text-foreground hover:border-ink",
+  ghost: "text-foreground hover:text-cognac",
 };
 
 const sizes = {
-  sm: "h-9 px-3.5 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-13 px-7 text-base",
+  sm: "h-10 px-4 text-[0.7rem]",
+  md: "h-12 px-6 text-[0.76rem]",
+  lg: "h-14 px-8 text-[0.8rem]",
 };
 
 export function WhatsAppLink({
   source,
   extra,
-  children = "Hablar por WhatsApp",
+  children = "Hablar con María Regina",
   className,
   variant = "solid",
   size = "md",
@@ -41,7 +42,7 @@ export function WhatsAppLink({
       rel="noopener noreferrer"
       onClick={() => track("whatsapp_clicked", { whatsapp_clicked_source: source })}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 active:scale-[0.98]",
+        "inline-flex items-center justify-center gap-2 rounded-sm font-medium uppercase tracking-[0.18em] transition-all duration-300 hover:-translate-y-[2px] active:translate-y-0",
         variants[variant],
         sizes[size],
         className,
