@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
-import retrato from "@/assets/retrato-consultora.jpg";
+import mariaRegina from "@/assets/maria-regina.png.asset.json";
 import { site, track } from "@/lib/site";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
@@ -25,7 +25,7 @@ function SobreMi() {
     <div className="container-page py-12 md:py-20">
       <div className="grid gap-10 md:grid-cols-[0.9fr_1fr] md:gap-16">
         <img
-          src={retrato}
+          src={mariaRegina.url}
           alt={`${site.consultant.name}, consultora independiente de Thermomix`}
           loading="lazy"
           className="w-full rounded-[1.5rem] object-cover"

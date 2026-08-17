@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import heroImg from "@/assets/hero-cocina.jpg";
+import heroImg from "@/assets/cocina-mediterranea.jpg";
 import { Chip, Disclaimer, SectionHeading } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 import { track } from "@/lib/site";

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Play } from "lucide-react";
-import liveImg from "@/assets/live-cocina.jpg";
+import liveImg from "@/assets/live-italiana.jpg";
 import { recipes } from "@/data/recipes";
 import { track } from "@/lib/site";
 import { SectionHeading } from "@/components/site/ui-bits";

@@ -5,16 +5,17 @@
 
 export const site = {
   name: "Yo Uso Thermomix",
+  signature: "con María Regina",
   consultant: {
-    // PLACEHOLDER: nombre real de la consultora
-    name: "Ana",
-    fullName: "Ana [Apellido]",
+    name: "María Regina",
+    fullName: "María Regina",
     location: "Ciudad de Guatemala",
   },
   // PLACEHOLDER: número de WhatsApp real (formato internacional, sin +)
   whatsappNumber: "50200000000",
   social: {
-    instagram: "https://instagram.com/", // PLACEHOLDER
+    instagramHandle: "@yousothermomix",
+    instagram: "https://instagram.com/yousothermomix", // PLACEHOLDER
     tiktok: "https://tiktok.com/", // PLACEHOLDER
     youtube: "https://youtube.com/", // PLACEHOLDER
   },
@@ -34,22 +35,26 @@ export type WhatsAppSource =
   | "about"
   | "meal_planner"
   | "hazlo_en_casa"
+  | "vacia_mi_refri"
+  | "acompanamiento"
   | "time_calculator";
 
 const messages: Record<WhatsAppSource, string> = {
-  homepage: "Hola, vi tu página y me gustaría conocer más sobre Thermomix.",
-  nav: "Hola, me gustaría hacerte una consulta sobre Thermomix.",
-  footer: "Hola, tengo una duda sobre Thermomix.",
-  savings_calculator: "Hola, quiero entender cuánto podría ahorrar cocinando más en casa.",
-  recipe: "Hola, quiero saber cómo preparar esta receta con Thermomix.",
-  recipe_generator: "Hola, estuve usando el generador de recetas y tengo una duda.",
-  thermomix_quiz: "Hola, hice el quiz y quiero probar Thermomix.",
-  thermomix_page: "Hola, quiero una demostración de Thermomix.",
-  lives: "Hola, quiero saber más sobre los próximos Lives de cocina.",
-  about: "Hola, me gustaría platicar contigo sobre Thermomix.",
-  meal_planner: "Hola, quiero ayuda para planear el menú de mi semana.",
-  hazlo_en_casa: "Hola, quiero saber qué puedo preparar en casa con Thermomix.",
-  time_calculator: "Hola, quiero saber cómo simplificar mi tiempo en la cocina.",
+  homepage: "Hola María Regina, vi tu página y me gustaría conocer más sobre Thermomix.",
+  nav: "Hola María Regina, me gustaría hacerte una consulta.",
+  footer: "Hola María Regina, tengo una duda sobre Thermomix.",
+  savings_calculator: "Hola María Regina, quiero entender dónde podría optimizar mi gasto cocinando más en casa.",
+  recipe: "Hola María Regina, quiero saber cómo preparar esta receta.",
+  recipe_generator: "Hola María Regina, estuve buscando ideas para cocinar y tengo una duda.",
+  thermomix_quiz: "Hola María Regina, hice el test y quiero ver la Thermomix funcionando.",
+  thermomix_page: "Hola María Regina, quiero una demostración de Thermomix.",
+  lives: "Hola María Regina, quiero saber más sobre los próximos Lives.",
+  about: "Hola María Regina, me gustaría platicar contigo.",
+  meal_planner: "Hola María Regina, quiero ayuda para planear el menú de mi semana.",
+  hazlo_en_casa: "Hola María Regina, quiero saber qué me conviene hacer en casa.",
+  vacia_mi_refri: "Hola María Regina, quiero ideas para aprovechar lo que tengo en el refri.",
+  acompanamiento: "Hola María Regina, quiero saber cómo acompañas después de la compra.",
+  time_calculator: "Hola María Regina, quiero simplificar mi tiempo en la cocina.",
 };
 
 export function whatsappUrl(source: WhatsAppSource, extra?: string) {
@@ -69,6 +74,7 @@ export type AnalyticsEvent =
   | "whatsapp_clicked"
   | "instagram_clicked"
   | "live_clicked"
+  | "cooking_mode_started"
   | "account_created"
   | "plus_viewed"
   | "newsletter_signup";

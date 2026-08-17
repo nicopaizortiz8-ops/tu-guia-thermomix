@@ -33,8 +33,8 @@ export const categories = [
   { id: "saludables", label: "🥗 Saludables" },
   { id: "familia", label: "👨‍👩‍👧 Para toda la familia" },
   { id: "postres", label: "🍰 Postres" },
-  { id: "comunidad", label: "❤️ Favoritas de la comunidad" },
-  { id: "autora", label: "⭐ Recetas de Ana" },
+  { id: "comunidad", label: "🕒 Lo que cocino cuando no tengo tiempo" },
+  { id: "autora", label: "⭐ Favoritas de María Regina" },
 ];
 
 export const recipes: Recipe[] = [

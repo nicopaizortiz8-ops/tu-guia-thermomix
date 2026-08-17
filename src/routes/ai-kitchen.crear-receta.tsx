@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Plus, Sparkles, X } from "lucide-react";
 import { recipes } from "@/data/recipes";
 import { track } from "@/lib/site";
-import { Chip, Disclaimer, UsageMeter } from "@/components/site/ui-bits";
+import { Chip, Disclaimer, IdeasMeter } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
 export const Route = createFileRoute("/ai-kitchen/crear-receta")({
@@ -51,7 +51,7 @@ function CrearReceta() {
         to="/ai-kitchen"
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="size-4" /> AI Kitchen
+        <ArrowLeft className="size-4" /> ¿Qué cocinamos?
       </Link>
 
       <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
@@ -61,7 +61,7 @@ function CrearReceta() {
             Cuéntame qué tienes a la mano y te propongo tres formas de resolver la comida.
           </p>
         </div>
-        <UsageMeter used={3} total={5} />
+        <IdeasMeter used={3} total={5} />
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
@@ -218,7 +218,7 @@ function CrearReceta() {
                   ¿Quieres saber cómo quedarían estas recetas hechas en Thermomix?
                 </p>
                 <WhatsAppLink source="recipe_generator" className="mt-4" size="sm">
-                  Preguntarle a {"Ana"}
+                  Preguntarle a {"María Regina"}
                 </WhatsAppLink>
               </div>
             </div>

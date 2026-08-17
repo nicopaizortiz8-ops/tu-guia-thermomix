@@ -22,6 +22,7 @@ import { Route as AiKitchenHazloEnCasaRouteImport } from './routes/ai-kitchen.ha
 import { Route as AiKitchenPlanSemanalRouteImport } from './routes/ai-kitchen.plan-semanal'
 import { Route as AiKitchenPreguntameRouteImport } from './routes/ai-kitchen.preguntame'
 import { Route as AiKitchenTiempoRouteImport } from './routes/ai-kitchen.tiempo'
+import { Route as AiKitchenVaciaMiRefriRouteImport } from './routes/ai-kitchen.vacia-mi-refri'
 import { Route as RecetasIndexRouteImport } from './routes/recetas.index'
 import { Route as RecetasSlugRouteImport } from './routes/recetas.$slug'
 
@@ -90,6 +91,11 @@ const AiKitchenTiempoRoute = AiKitchenTiempoRouteImport.update({
   path: '/ai-kitchen/tiempo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiKitchenVaciaMiRefriRoute = AiKitchenVaciaMiRefriRouteImport.update({
+  id: '/ai-kitchen/vacia-mi-refri',
+  path: '/ai-kitchen/vacia-mi-refri',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RecetasIndexRoute = RecetasIndexRouteImport.update({
   id: '/recetas/',
   path: '/recetas/',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
   '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
   '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
+  '/ai-kitchen/vacia-mi-refri': typeof AiKitchenVaciaMiRefriRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
   '/recetas/': typeof RecetasIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
   '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
   '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
+  '/ai-kitchen/vacia-mi-refri': typeof AiKitchenVaciaMiRefriRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen': typeof AiKitchenIndexRoute
   '/recetas': typeof RecetasIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/ai-kitchen/plan-semanal': typeof AiKitchenPlanSemanalRoute
   '/ai-kitchen/preguntame': typeof AiKitchenPreguntameRoute
   '/ai-kitchen/tiempo': typeof AiKitchenTiempoRoute
+  '/ai-kitchen/vacia-mi-refri': typeof AiKitchenVaciaMiRefriRoute
   '/recetas/$slug': typeof RecetasSlugRoute
   '/ai-kitchen/': typeof AiKitchenIndexRoute
   '/recetas/': typeof RecetasIndexRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/ai-kitchen/plan-semanal'
     | '/ai-kitchen/preguntame'
     | '/ai-kitchen/tiempo'
+    | '/ai-kitchen/vacia-mi-refri'
     | '/recetas/$slug'
     | '/ai-kitchen/'
     | '/recetas/'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/ai-kitchen/plan-semanal'
     | '/ai-kitchen/preguntame'
     | '/ai-kitchen/tiempo'
+    | '/ai-kitchen/vacia-mi-refri'
     | '/recetas/$slug'
     | '/ai-kitchen'
     | '/recetas'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/ai-kitchen/plan-semanal'
     | '/ai-kitchen/preguntame'
     | '/ai-kitchen/tiempo'
+    | '/ai-kitchen/vacia-mi-refri'
     | '/recetas/$slug'
     | '/ai-kitchen/'
     | '/recetas/'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   AiKitchenPlanSemanalRoute: typeof AiKitchenPlanSemanalRoute
   AiKitchenPreguntameRoute: typeof AiKitchenPreguntameRoute
   AiKitchenTiempoRoute: typeof AiKitchenTiempoRoute
+  AiKitchenVaciaMiRefriRoute: typeof AiKitchenVaciaMiRefriRoute
   RecetasSlugRoute: typeof RecetasSlugRoute
   AiKitchenIndexRoute: typeof AiKitchenIndexRoute
   RecetasIndexRoute: typeof RecetasIndexRoute
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiKitchenTiempoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-kitchen/vacia-mi-refri': {
+      id: '/ai-kitchen/vacia-mi-refri'
+      path: '/ai-kitchen/vacia-mi-refri'
+      fullPath: '/ai-kitchen/vacia-mi-refri'
+      preLoaderRoute: typeof AiKitchenVaciaMiRefriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recetas/': {
       id: '/recetas/'
       path: '/recetas'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiKitchenPlanSemanalRoute: AiKitchenPlanSemanalRoute,
   AiKitchenPreguntameRoute: AiKitchenPreguntameRoute,
   AiKitchenTiempoRoute: AiKitchenTiempoRoute,
+  AiKitchenVaciaMiRefriRoute: AiKitchenVaciaMiRefriRoute,
   RecetasSlugRoute: RecetasSlugRoute,
   AiKitchenIndexRoute: AiKitchenIndexRoute,
   RecetasIndexRoute: RecetasIndexRoute,

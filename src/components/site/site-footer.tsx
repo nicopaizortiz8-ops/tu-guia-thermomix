@@ -1,32 +1,37 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram } from "lucide-react";
 import { site, track } from "@/lib/site";
-import { WhatsAppLink } from "./whatsapp-link";
+import { BrandLockup } from "./brand";
+import { whatsappUrl } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border bg-secondary/60">
-      <div className="container-page py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer className="bg-ink text-warm-white">
+      <div className="container-page py-16 md:py-24">
+        <div className="grid gap-14 md:grid-cols-[1.4fr_repeat(3,0.7fr)]">
           <div>
-            <p className="font-display text-2xl">Yo Uso Thermomix</p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <BrandLockup className="text-warm-white" />
+            <p className="mt-8 max-w-xs text-sm leading-relaxed text-warm-white/60">
               Recetas, Lives y herramientas para cocinar mejor en casa, desde Guatemala.
             </p>
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 text-[0.72rem] uppercase tracking-[0.2em]">
               <a
                 href={site.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("instagram_clicked", { source: "footer" })}
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card transition-colors hover:bg-background"
-                aria-label="Instagram"
+                className="editorial-link w-fit text-warm-white/80 hover:text-warm-white"
               >
-                <Instagram className="size-[18px]" />
+                Instagram {site.social.instagramHandle}
               </a>
-              <WhatsAppLink source="footer" size="sm" variant="outline">
+              <a
+                href={whatsappUrl("footer")}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_clicked", { whatsapp_clicked_source: "footer" })}
+                className="editorial-link w-fit text-warm-white/80 hover:text-warm-white"
+              >
                 WhatsApp
-              </WhatsAppLink>
+              </a>
             </div>
           </div>
 
@@ -34,9 +39,8 @@ export function SiteFooter() {
             title="Cocinar"
             items={[
               { to: "/recetas", label: "Recetas" },
-              { to: "/ai-kitchen", label: "AI Kitchen" },
-              { to: "/ai-kitchen/crear-receta", label: "¿Qué cocino hoy?" },
-              { to: "/ai-kitchen/plan-semanal", label: "Planea mi semana" },
+              { to: "/ai-kitchen", label: "¿Qué cocinamos?" },
+              { to: "/ai-kitchen/plan-semanal", label: "Mi semana" },
             ]}
           />
           <FooterCol
@@ -44,36 +48,35 @@ export function SiteFooter() {
             items={[
               { to: "/lives", label: "Lives" },
               { to: "/thermomix", label: "Conoce Thermomix" },
-              { to: "/ai-kitchen/ahorro", label: "Calcula tu ahorro" },
-              { to: "/sobre-mi", label: "Sobre mí" },
+              { to: "/sobre-mi", label: "María Regina" },
             ]}
           />
           <FooterCol
             title="Cuenta"
             items={[
-              { to: "/mi-cocina", label: "Mi Cocina" },
-              { to: "/plus", label: "Thermomix+" },
+              { to: "/mi-cocina", label: "Mi cocina" },
+              { to: "/plus", label: "Club Yo Uso" },
             ]}
           />
         </div>
 
-        <div className="mt-12 space-y-3 border-t border-border pt-8 text-xs leading-relaxed text-muted-foreground">
-          <p>
-            Yo Uso Thermomix es una iniciativa independiente de una consultora de Thermomix en
-            Guatemala. [Texto de divulgación pendiente de confirmación].
+        <div className="mt-16 space-y-4 border-t border-warm-white/15 pt-10 text-[0.72rem] leading-relaxed text-warm-white/45">
+          <p className="max-w-3xl">
+            Yo Uso Thermomix es una iniciativa independiente de María Regina, consultora de
+            Thermomix en Guatemala. [Texto de divulgación pendiente de confirmación.] Las recetas e
+            ideas generadas con herramientas automáticas son sugerencias y pueden requerir ajustes.
+            Los cálculos de costos y tiempos son estimaciones.
           </p>
-          <p>
-            Las recetas creadas con herramientas automáticas son sugerencias y pueden requerir
-            ajustes o verificación antes de cocinarlas. Los cálculos de ahorro y tiempo son
-            estimaciones y varían según ingredientes, establecimientos y hábitos.
-          </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 pt-2">
+          <div className="flex flex-wrap gap-x-8 gap-y-2 pt-2 uppercase tracking-[0.2em]">
             <span>© {new Date().getFullYear()} Yo Uso Thermomix</span>
-            <Link to="/" hash="privacidad" className="hover:text-foreground">
+            <Link to="/" hash="privacidad" className="hover:text-warm-white">
               Privacidad
             </Link>
-            <Link to="/" hash="terminos" className="hover:text-foreground">
+            <Link to="/" hash="terminos" className="hover:text-warm-white">
               Términos
+            </Link>
+            <Link to="/" hash="divulgacion" className="hover:text-warm-white">
+              Divulgación
             </Link>
           </div>
         </div>
@@ -91,11 +94,14 @@ function FooterCol({
 }) {
   return (
     <div>
-      <p className="eyebrow">{title}</p>
-      <ul className="mt-4 space-y-2.5 text-sm">
+      <p className="text-[0.66rem] uppercase tracking-[0.28em] text-champagne">{title}</p>
+      <ul className="mt-6 space-y-3 text-sm">
         {items.map((i) => (
           <li key={i.to}>
-            <Link to={i.to} className="text-foreground/75 transition-colors hover:text-foreground">
+            <Link
+              to={i.to}
+              className="editorial-link text-warm-white/70 transition-colors hover:text-warm-white"
+            >
               {i.label}
             </Link>
           </li>

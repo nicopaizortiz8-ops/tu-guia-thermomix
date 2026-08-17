@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Search, X, UserRound } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "./brand";
 import { WhatsAppLink } from "./whatsapp-link";
 
 const links = [
   { to: "/", label: "Inicio" },
-  { to: "/ai-kitchen", label: "AI Kitchen" },
+  { to: "/ai-kitchen", label: "¿Qué cocinamos?" },
   { to: "/recetas", label: "Recetas" },
   { to: "/lives", label: "Lives" },
   { to: "/thermomix", label: "Conoce Thermomix" },
-  { to: "/sobre-mi", label: "Sobre mí" },
+  { to: "/sobre-mi", label: "María Regina" },
 ] as const;
 
 export function SiteNav() {
@@ -30,27 +31,22 @@ export function SiteNav() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
+        "sticky top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-border/70 bg-background/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent",
+          ? "border-b border-border/80 bg-background/92 backdrop-blur-xl"
+          : "border-b border-transparent bg-background",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex flex-col leading-none">
-          <span className="font-display text-lg tracking-tight md:text-xl">Yo Uso Thermomix</span>
-          <span className="mt-0.5 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
-            Cocina · Recetas · Herramientas
-          </span>
-        </Link>
+      <div className="container-wide grid h-[4.5rem] grid-cols-[auto_1fr_auto] items-center gap-4 md:h-24">
+        <BrandLogo />
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center justify-center gap-8 xl:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="text-sm text-foreground/75 transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground font-medium" }}
+              className="editorial-link text-[0.72rem] uppercase tracking-[0.2em] text-foreground/65 transition-colors hover:text-foreground"
+              activeProps={{ className: "text-foreground" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
@@ -58,28 +54,28 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-1 md:gap-2">
           <Link
             to="/recetas"
             aria-label="Buscar recetas"
-            className="hidden size-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground md:inline-flex"
+            className="hidden size-10 items-center justify-center text-foreground/60 transition-colors hover:text-foreground md:inline-flex"
           >
-            <Search className="size-[18px]" />
+            <Search className="size-[17px]" />
           </Link>
           <Link
             to="/mi-cocina"
-            className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm text-foreground/75 transition-colors hover:bg-secondary hover:text-foreground lg:inline-flex"
+            className="hidden items-center gap-1.5 px-2 text-[0.72rem] uppercase tracking-[0.18em] text-foreground/60 transition-colors hover:text-foreground xl:inline-flex"
           >
             <UserRound className="size-4" />
             Iniciar sesión
           </Link>
-          <WhatsAppLink source="nav" className="hidden sm:inline-flex" size="sm">
-            Hablar por WhatsApp
+          <WhatsAppLink source="nav" className="hidden sm:inline-flex" size="sm" showIcon={false}>
+            Hablar con María Regina
           </WhatsAppLink>
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card lg:hidden"
+            className="inline-flex size-10 items-center justify-center border border-border xl:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -87,24 +83,28 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="container-page flex flex-col py-3">
-            {links.map((l) => (
+        <div className="border-t border-border bg-background xl:hidden">
+          <nav className="container-page flex flex-col py-4">
+            {links.map((l, i) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className="border-b border-border/60 py-3.5 font-display text-xl"
-                activeProps={{ className: "text-primary" }}
+                className="flex items-baseline gap-4 border-b border-border/60 py-4 font-display text-2xl"
+                activeProps={{ className: "text-cognac" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
+                <span className="num-index">{String(i + 1).padStart(2, "0")}</span>
                 {l.label}
               </Link>
             ))}
-            <Link to="/mi-cocina" className="py-3.5 text-sm text-muted-foreground">
+            <Link
+              to="/mi-cocina"
+              className="py-4 text-[0.72rem] uppercase tracking-[0.2em] text-muted-foreground"
+            >
               Iniciar sesión
             </Link>
-            <WhatsAppLink source="nav" size="lg" className="mb-4 w-full">
-              Hablar por WhatsApp
+            <WhatsAppLink source="nav" size="lg" className="mb-4 w-full" showIcon={false}>
+              Hablar con María Regina
             </WhatsAppLink>
           </nav>
         </div>

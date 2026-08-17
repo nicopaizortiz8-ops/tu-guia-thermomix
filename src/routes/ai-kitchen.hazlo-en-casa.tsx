@@ -8,13 +8,13 @@ import { formatQ, track } from "@/lib/site";
 export const Route = createFileRoute("/ai-kitchen/hazlo-en-casa")({
   head: () => ({
     meta: [
-      { title: "Hazlo en casa — Qué puedes preparar tú mismo | Yo Uso Thermomix" },
+      { title: "¿Lo compro o lo hago? — Qué puedes preparar tú mismo | Yo Uso Thermomix" },
       {
         name: "description",
         content:
           "Descubre qué productos del supermercado podrías preparar en casa y compara costos estimados.",
       },
-      { property: "og:title", content: "Hazlo en casa | Yo Uso Thermomix" },
+      { property: "og:title", content: "¿Lo compro o lo hago? | Yo Uso Thermomix" },
       {
         property: "og:description",
         content: "Pan, yogurt, salsas y más, hechos en casa.",
@@ -55,10 +55,10 @@ function HazloEnCasa() {
         to="/ai-kitchen"
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="size-4" /> AI Kitchen
+        <ArrowLeft className="size-4" /> ¿Qué cocinamos?
       </Link>
 
-      <h1 className="mt-6 max-w-2xl text-3xl md:text-[2.6rem]">¿Qué podrías preparar en casa?</h1>
+      <h1 className="mt-6 max-w-2xl text-3xl md:text-[2.6rem]">¿Lo compro o lo hago?</h1>
       <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">
         Marca lo que sueles comprar hecho. No todo resulta siempre más barato en casa: aquí verás
         una comparación estimada para decidir con calma.

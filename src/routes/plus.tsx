@@ -6,13 +6,13 @@ import { WhatsAppLink } from "@/components/site/whatsapp-link";
 export const Route = createFileRoute("/plus")({
   head: () => ({
     meta: [
-      { title: "Yo Uso Thermomix+ — Cocina más. Planea menos." },
+      { title: "Club Yo Uso — Cocina más. Planea menos." },
       {
         name: "description",
         content:
-          "Más generaciones en AI Kitchen, planificación semanal, recetas exclusivas e historial. Próximamente.",
+          "Más ideas cada mes, planificación semanal, recetas exclusivas e historial. Próximamente.",
       },
-      { property: "og:title", content: "Yo Uso Thermomix+" },
+      { property: "og:title", content: "Club Yo Uso" },
       { property: "og:description", content: "Cocina más. Planea menos. Próximamente." },
     ],
   }),
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/plus")({
 });
 
 const gratis = [
-  "Generaciones limitadas de AI Kitchen",
+  "Ideas limitadas cada mes",
   "Recetas básicas",
   "Calculadora de ahorro",
   "Lives",
@@ -61,7 +61,7 @@ function Plus() {
         </div>
         <div className="rounded-[1.5rem] bg-primary p-8 text-primary-foreground">
           <p className="text-[0.7rem] uppercase tracking-[0.18em] text-primary-foreground/70">
-            Thermomix+
+            Club Yo Uso
           </p>
           <p className="mt-3 font-display text-3xl">Próximamente</p>
           <ul className="mt-6 space-y-3 text-sm">

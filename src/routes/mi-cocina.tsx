@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarDays, Heart, Settings, ShoppingCart, Sparkles } from "lucide-react";
 import { recipes } from "@/data/recipes";
-import { RecipeCard, UsageMeter } from "@/components/site/ui-bits";
+import { RecipeCard, IdeasMeter } from "@/components/site/ui-bits";
 
 export const Route = createFileRoute("/mi-cocina")({
   head: () => ({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/mi-cocina")({
       {
         name: "description",
         content:
-          "Tu espacio personal: recetas guardadas, planes semanales, listas de compras e historial de AI Kitchen.",
+          "Tu espacio personal: recetas guardadas, planes semanales, listas de compras e historial de ideas inteligentes.",
       },
       { property: "og:title", content: "Mi Cocina | Yo Uso Thermomix" },
       { property: "og:description", content: "Tus recetas guardadas y tus planes de la semana." },
@@ -23,7 +23,7 @@ const secciones = [
   { icon: Heart, label: "Mis recetas" },
   { icon: CalendarDays, label: "Mis semanas" },
   { icon: ShoppingCart, label: "Mis listas" },
-  { icon: Sparkles, label: "Historial de AI Kitchen" },
+  { icon: Sparkles, label: "Historial de ideas" },
   { icon: Settings, label: "Preferencias" },
 ];
 
@@ -39,7 +39,7 @@ function MiCocina() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <UsageMeter used={3} total={5} />
+          <IdeasMeter used={3} total={5} />
           <Link
             to="/plus"
             className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
