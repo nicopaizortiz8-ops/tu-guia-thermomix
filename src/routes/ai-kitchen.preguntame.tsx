@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Send } from "lucide-react";
-import { Chip, Disclaimer, UsageMeter } from "@/components/site/ui-bits";
+import { Chip, Disclaimer, IdeasMeter } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
 export const Route = createFileRoute("/ai-kitchen/preguntame")({
@@ -41,7 +41,7 @@ function Preguntame() {
       </Link>
       <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
         <h1 className="text-3xl md:text-[2.6rem]">Pregúntame</h1>
-        <UsageMeter used={3} total={5} />
+        <IdeasMeter used={3} total={5} />
       </div>
       <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">
         Dudas sobre recetas, funciones o técnicas. Escribe con tus palabras.
@@ -85,7 +85,7 @@ function Preguntame() {
               etapa las respuestas se generarán en el servidor y se guardarán en tu historial.]
             </p>
             <WhatsAppLink source="recipe_generator" size="sm" variant="outline" className="mt-4">
-              Prefiero preguntarle a Ana
+              Prefiero preguntarle a María Regina
             </WhatsAppLink>
           </div>
         )}
