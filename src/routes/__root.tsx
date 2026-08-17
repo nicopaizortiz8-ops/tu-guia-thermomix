@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Yo Uso Thermomix — Cocina mejor. Disfruta más." },
+      { title: "Yo Uso Thermomix — Cocina conmigo. Disfruta más." },
       {
         name: "description",
         content:
-          "Recetas, Lives y herramientas inteligentes para aprovechar tu cocina con Thermomix, desde Guatemala.",
+          "Recetas, Lives e ideas de María Regina para cocinar mejor en casa, desde Guatemala.",
       },
-      { name: "author", content: "Yo Uso Thermomix" },
+      { name: "author", content: "María Regina — Yo Uso Thermomix" },
       { property: "og:title", content: "Yo Uso Thermomix" },
       {
         property: "og:description",
@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
 
@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
       </head>
