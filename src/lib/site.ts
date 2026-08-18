@@ -37,6 +37,10 @@ export type WhatsAppSource =
   | "hazlo_en_casa"
   | "vacia_mi_refri"
   | "acompanamiento"
+  | "financing"
+  | "demonstration"
+  | "purchase_interest"
+  | "perspectiva"
   | "time_calculator";
 
 const messages: Record<WhatsAppSource, string> = {
@@ -55,6 +59,12 @@ const messages: Record<WhatsAppSource, string> = {
   vacia_mi_refri: "Hola María Regina, quiero ideas para aprovechar lo que tengo en el refri.",
   acompanamiento: "Hola María Regina, quiero saber cómo acompañas después de la compra.",
   time_calculator: "Hola María Regina, quiero simplificar mi tiempo en la cocina.",
+  financing:
+    "Hola María Regina, quisiera conocer las opciones actuales de financiamiento para Thermomix.",
+  demonstration: "Hola María Regina, quiero verla funcionando y vivir la experiencia.",
+  purchase_interest: "Hola María Regina, quiero conocer el proceso para llevarme una Thermomix.",
+  perspectiva:
+    "Hola María Regina, hice la comparación de gastos en tu página y quisiera conocer las opciones actuales de financiamiento para Thermomix.",
 };
 
 export function whatsappUrl(source: WhatsAppSource, extra?: string) {
