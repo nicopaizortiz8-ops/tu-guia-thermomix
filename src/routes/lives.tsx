@@ -4,6 +4,7 @@ import liveImg from "@/assets/live-italiana.jpg";
 import { recipes } from "@/data/recipes";
 import { track } from "@/lib/site";
 import { SectionHeading } from "@/components/site/ui-bits";
+import LiveCalendar from "@/components/site/live-calendar";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
 export const Route = createFileRoute("/lives")({
@@ -31,34 +32,32 @@ function Lives() {
         description="Cada semana cocinamos en vivo una receta completa y respondo dudas mientras avanzamos."
       />
 
-      <div className="mt-12 grid gap-8 rounded-[1.75rem] border border-border bg-card p-6 md:grid-cols-2 md:items-center md:p-10">
-        <div className="relative overflow-hidden rounded-[1.25rem]">
-          <img src={liveImg} alt="Próximo live" loading="lazy" className="w-full object-cover" />
-          <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.15em] text-accent-foreground">
-            ● Próximo live
-          </span>
+      <div className="mt-12 grid gap-8 md:grid-cols-2">
+        <div>
+          <img src={liveImg} alt="Próximo live" loading="lazy" className="w-full rounded-2xl object-cover" />
         </div>
         <div>
-          <p className="eyebrow">[Fecha por confirmar]</p>
-          <h2 className="mt-3 text-3xl">Jueves · 7:00 p.m.</h2>
-          <p className="mt-3 text-muted-foreground">
-            Preparamos: <span className="text-foreground">Pan casero de todos los días</span>
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <p className="eyebrow">Próximos Lives</p>
+          <h2 className="mt-3 text-3xl">Nos vemos en la cocina</h2>
+          <p className="mt-3 text-muted-foreground">Cocinamos en vivo una receta cada semana y respondo dudas en directo. Añade el evento a tu calendario para no perdértelo.</p>
+
+          <div className="mt-6">
+            {/* Live calendar component */}
+            <LiveCalendar />
+          </div>
+
+          <div className="mt-6">
             <a
               href="#"
               onClick={() => track("live_clicked", { source: "lives_page" })}
-              className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
+              className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-1"
             >
               Quiero verlo
             </a>
-            <button className="inline-flex h-11 items-center rounded-full border border-border px-5 text-sm font-medium hover:bg-secondary">
-              Recordármelo
-            </button>
+            <a href="#" className="inline-flex ml-3 h-11 items-center rounded-full border border-border px-5 text-sm font-medium hover:bg-secondary transition-all duration-200">Ver Lives anteriores</a>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            [Enlace al Live pendiente de integración con Instagram.]
-          </p>
+
+          <p className="mt-4 text-xs text-muted-foreground">Enlace al Live en Instagram cuando esté programado.</p>
         </div>
       </div>
 

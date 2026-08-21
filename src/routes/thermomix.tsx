@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
+import mariaRegina from "@/assets/maria-regina.png";
 import enUso from "@/assets/thermomix-en-uso.jpg";
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
@@ -16,6 +16,7 @@ import {
 } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 import { track } from "@/lib/site";
+import { thermomixCashPrice, thermomixMonthlyFrom, thermomixMaxInstallments, thermomixPriceLastVerified } from "@/data/commerce-config";
 
 export const Route = createFileRoute("/thermomix")({
   head: () => ({
@@ -38,7 +39,6 @@ export const Route = createFileRoute("/thermomix")({
   component: ThermomixPage,
 });
 
-const REF_CUOTA = 395.83;
 
 const q = (n: number) =>
   `Q${n.toLocaleString("es-GT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -102,7 +102,7 @@ function Hero() {
         </div>
         <div className="hover-zoom">
           <img
-            src={mariaRegina.url}
+            src={mariaRegina}
             alt="María Regina en su cocina con su Thermomix"
             width={1200}
             height={1500}
@@ -690,7 +690,7 @@ function Quiz() {
 const plazos = ["Contado", "12 cuotas", "18 cuotas", "24 cuotas", "36 cuotas", "48 cuotas"];
 
 export const financiamientoDisclaimer =
-  "Desde Q395.83 al mes en planes elegibles de hasta 48 cuotas. Condiciones, promociones y disponibilidad sujetas a cambio. Consulta las opciones vigentes con María Regina.";
+  `Desde ${q(thermomixMonthlyFrom)} al mes en planes elegibles de hasta ${thermomixMaxInstallments} cuotas. Condiciones, promociones y disponibilidad sujetas a cambio. Consulta las opciones vigentes con María Regina.`;
 
 function Financiamiento() {
   const [plazo, setPlazo] = useState<string | null>(null);
@@ -710,7 +710,7 @@ function Financiamiento() {
           <div className="border-t border-ink/20 pt-8">
             <p className="text-[0.66rem] uppercase tracking-[0.28em] text-muted-foreground">Desde</p>
             <p className="mt-2 font-display text-[4.2rem] leading-[0.85] tracking-tight md:text-[8rem]">
-              Q395.83
+                          {q(thermomixMonthlyFrom)}
             </p>
             <p className="mt-4 text-[0.66rem] uppercase tracking-[0.28em] text-muted-foreground">
               Al mes
@@ -746,7 +746,7 @@ function Financiamiento() {
             <div className="mt-8 max-w-2xl border-l border-champagne pl-5">
               {plazo === "48 cuotas" ? (
                 <p className="font-display text-xl leading-snug">
-                  48 cuotas → desde Q395.83 al mes en planes elegibles.
+                  48 cuotas → desde {q(thermomixMonthlyFrom)} al mes en planes elegibles.
                 </p>
               ) : (
                 <p className="font-display text-xl leading-snug">
@@ -812,8 +812,8 @@ function Perspectiva() {
 
   const mensual = Math.max(porCena, 0) * Math.max(veces, 0);
   const totalComida = mensual + delivery + preparados;
-  const pct = mensual > 0 ? (REF_CUOTA / mensual) * 100 : 0;
-  const cenas = porCena > 0 ? REF_CUOTA / porCena : 0;
+  const pct = mensual > 0 ? (thermomixMonthlyFrom / mensual) * 100 : 0;
+  const cenas = porCena > 0 ? thermomixMonthlyFrom / porCena : 0;
   const evitado = Math.min(reemplazadas, veces) * porCena;
 
   const frase = useMemo(() => {
@@ -945,7 +945,7 @@ function Perspectiva() {
                 Thermomix · referencia
               </p>
               <p className="mt-2 font-display text-[2.6rem] leading-[0.9] text-espresso md:text-[3.6rem]">
-                {q(REF_CUOTA)}
+                              {q(thermomixMonthlyFrom)}
                 <span className="ml-2 text-lg text-muted-foreground">/ mes*</span>
               </p>
               <p className="mt-2 text-sm text-muted-foreground">hasta 48 cuotas</p>
@@ -958,7 +958,7 @@ function Perspectiva() {
             {mensual > 0 && (
               <div className="mt-10 space-y-4 border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  En este ejemplo, una cuota desde {q(REF_CUOTA)} equivale aproximadamente al{" "}
+                  En este ejemplo, una cuota desde {q(thermomixMonthlyFrom)} equivale aproximadamente al{" "}
                   <span className="text-foreground">{pct.toFixed(1)}%</span> de lo que indicas que
                   gastas al mes en cenas fuera.
                 </p>
@@ -987,7 +987,7 @@ function Perspectiva() {
                 <p className="text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground">
                   12 cuotas de referencia
                 </p>
-                <p className="mt-2 font-display text-3xl">{q(REF_CUOTA * 12)}</p>
+                <p className="mt-2 font-display text-3xl">{q(thermomixMonthlyFrom * 12)}</p>
               </div>
               <p className="text-[0.72rem] leading-relaxed text-muted-foreground sm:col-span-2">
                 Son dos categorías de gasto distintas. Esto no significa que dejarías de salir a
@@ -1081,7 +1081,7 @@ function DespuesDeComprar() {
       <div className="container-wide">
         <Label index="13" tone="light">Y si decides comprarla…</Label>
         <h2 className="mt-7 max-w-2xl text-[2.3rem] leading-[0.95] text-warm-white md:text-[3.8rem]">
-          Ahí no termina
+          Aquí no termina
           <br />
           <span className="italic text-champagne">mi trabajo.</span>
         </h2>
@@ -1130,7 +1130,7 @@ function Cierre() {
     <section className="container-wide grid items-center gap-12 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:py-32">
       <div className="hover-zoom">
         <img
-          src={mariaRegina.url}
+          src={mariaRegina}
           alt="María Regina"
           loading="lazy"
           className="aspect-[4/5] w-full object-cover"

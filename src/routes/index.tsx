@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Instagram } from "lucide-react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
+import mariaRegina from "@/assets/maria-regina.png";
 import mesa from "@/assets/mesa-editorial.jpg";
 import refri from "@/assets/ingredientes-refri.jpg";
 import liveImg from "@/assets/live-italiana.jpg";
@@ -94,7 +94,7 @@ function Hero() {
 
         <div className="relative">
           <img
-            src={mariaRegina.url}
+            src={mariaRegina}
             alt="María Regina en su cocina con Thermomix"
             width={1129}
             height={1425}
@@ -750,7 +750,7 @@ function InstagramSection() {
   const tiles = [
     { src: recipes[1]?.image, ratio: "aspect-[4/5]", label: "Receta" },
     { src: mesa, ratio: "aspect-square", label: "Mesa" },
-    { src: mariaRegina.url, ratio: "aspect-[3/4]", label: "María Regina" },
+    { src: mariaRegina, ratio: "aspect-[3/4]", label: "María Regina" },
     { src: liveImg, ratio: "aspect-[4/3]", label: "Live" },
     { src: recipes[2]?.image, ratio: "aspect-square", label: "Receta" },
     { src: refri, ratio: "aspect-[3/4]", label: "Tips" },
@@ -832,7 +832,7 @@ function FinalCta() {
         </div>
         <div className="hover-zoom">
           <img
-            src={mariaRegina.url}
+            src={mariaRegina}
             alt="María Regina"
             loading="lazy"
             className="aspect-[4/5] w-full object-cover object-top"
