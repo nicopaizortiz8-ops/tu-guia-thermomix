@@ -313,6 +313,29 @@
   }
 }
 
+/* Page scroll snapping for homepage sections */
+.page-snap {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: calc(100vh - 4.5rem); /* accommodate sticky header height */
+  scroll-padding-top: 4.5rem;
+}
+
+.page-snap > * {
+  scroll-snap-align: start;
+  min-height: calc(100vh - 4.5rem);
+}
+
+@media (min-width: 768px) {
+  .page-snap {
+    height: calc(100vh - 6rem);
+    scroll-padding-top: 6rem;
+  }
+  .page-snap > * {
+    min-height: calc(100vh - 6rem);
+  }
+}
+
 @utility reveal {
   opacity: 0;
   transform: translateY(20px);

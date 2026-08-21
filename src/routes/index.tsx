@@ -40,24 +40,24 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <>
-      <Hero />
-      <Paths />
-      <QueCocinamos />
-      <HoyConMariaRegina />
-      <VaciaMiRefri />
-      <Recetas />
-      <ComproOHago />
-      <EnNumeros />
-      <LiveSection />
-      <ThermomixEnTuVida />
-      <QuizTeaser />
-      <Acompanamiento />
-      <PrimerosDias />
-      <InstagramSection />
-      <FinalCta />
-      <Newsletter />
-    </>
+    <div className="page-snap">
+      <div className="snap-section"><Hero /></div>
+      <div className="snap-section"><Paths /></div>
+      <div className="snap-section"><QueCocinamos /></div>
+      <div className="snap-section"><HoyConMariaRegina /></div>
+      <div className="snap-section"><VaciaMiRefri /></div>
+      <div className="snap-section"><Recetas /></div>
+      <div className="snap-section"><ComproOHago /></div>
+      <div className="snap-section"><EnNumeros /></div>
+      <div className="snap-section"><LiveSection /></div>
+      <div className="snap-section"><ThermomixEnTuVida /></div>
+      <div className="snap-section"><QuizTeaser /></div>
+      <div className="snap-section"><Acompanamiento /></div>
+      <div className="snap-section"><PrimerosDias /></div>
+      <div className="snap-section"><InstagramSection /></div>
+      <div className="snap-section"><FinalCta /></div>
+      <div className="snap-section"><Newsletter /></div>
+    </div>
   );
 }
 

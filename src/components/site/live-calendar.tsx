@@ -57,6 +57,14 @@ export default function LiveCalendar({ className }: { className?: string }) {
             >
               Descargar .ics
             </a>
+            <a
+              href={`data:text/calendar;charset=utf8,${encodeURIComponent(makeICS(e))}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform duration-200 hover:-translate-y-1 ml-2"
+            >
+              Añadir a Apple Calendar
+            </a>
           </div>
         </article>
       ))}

@@ -177,7 +177,7 @@ export function EditorialButton({
   type?: "button" | "submit";
 }) {
   const cls = cn(
-    "inline-flex h-12 items-center justify-center gap-2 rounded-sm px-7 text-[0.78rem] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne",
+    "inline-flex h-12 items-center justify-center gap-2 rounded-sm px-7 text-[0.78rem] font-medium uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne inline-animated-btn",
     variant === "solid" && "bg-ink text-warm-white hover:bg-espresso shadow-sm hover:shadow-md",
     variant === "outline" && "border border-ink/25 text-foreground hover:border-ink",
     variant === "light" && "bg-warm-white text-ink hover:bg-ivory",
