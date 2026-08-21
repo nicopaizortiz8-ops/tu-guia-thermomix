@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import type { Recipe } from "@/data/recipes";
+import HotspotCTA from "./hotspot-cta";
 
 /** Tiny uppercase editorial label, optionally numbered: 01 — INSPIRACIÓN */
 export function Label({
@@ -224,6 +225,12 @@ export function RecipeCard({
             size === "lg" && "aspect-[16/10]",
           )}
         />
+        <div className="absolute right-3 bottom-3 hidden md:block">
+          <HotspotCTA message={`Quiero mi Thermomix — receta: ${recipe.title}`} />
+        </div>
+        <div className="md:hidden absolute right-3 bottom-3">
+          <HotspotCTA message={`Quiero mi Thermomix — receta: ${recipe.title}`} />
+        </div>
       </div>
       <p className="mt-4 text-[0.62rem] uppercase tracking-[0.28em] text-champagne">
         {recipe.minutes} min · {recipe.difficulty}

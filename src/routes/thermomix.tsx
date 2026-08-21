@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import mariaRegina from "@/assets/maria-regina.png";
-import enUso from "@/assets/thermomix-en-uso.jpg";
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
 import pan from "@/assets/receta-pan.jpg";
@@ -138,13 +137,14 @@ function MiHistoria() {
             gustaba cocinar de la forma tradicional.
           </p>
           <p className="text-foreground">
-            Hasta que un día dejé de escuchar lo que otros decían de ella y la probé.
-          </p>
+                      Hasta que un día la probé y comprendí que no perdía mi forma de cocinar: simplemente
+                      había descubierto otra manera de disfrutarla. Primero vívela. Después decide.
+                    </p>
         </Reveal>
         <Reveal delay={100} className="hover-zoom">
           <img
-            src={enUso}
-            alt="Cocinando con Thermomix rodeada de ingredientes frescos"
+            src={mariaRegina}
+            alt="María Regina en su cocina"
             loading="lazy"
             width={1408}
             height={1008}
