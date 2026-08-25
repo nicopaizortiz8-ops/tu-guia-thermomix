@@ -6,9 +6,11 @@ import mesa from "@/assets/mesa-editorial.jpg";
 import refri from "@/assets/ingredientes-refri.jpg";
 import liveImg from "@/assets/live-italiana.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
+import thermomixEnUso from "@/assets/thermomix-en-uso.jpg";
 import { recipes } from "@/data/recipes";
 import { formatQ, site, track } from "@/lib/site";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
+import ScrollScrubVideo from "@/components/site/scroll-scrub-video";
 import {
   AnimatedNumber,
   ArrowLink,
@@ -39,25 +41,239 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  return <PremiumLanding />;
+}
+
+function PremiumLanding() {
   return (
-    <>
-      <Hero />
-      <Paths />
-      <QueCocinamos />
-      <HoyConMariaRegina />
-      <VaciaMiRefri />
-      <Recetas />
-      <ComproOHago />
-      <EnNumeros />
-      <LiveSection />
-      <ThermomixEnTuVida />
-      <QuizTeaser />
-      <Acompanamiento />
-      <PrimerosDias />
-      <InstagramSection />
-      <FinalCta />
-      <Newsletter />
-    </>
+    <main>
+      <PremiumHero />
+      <ScrollExperience />
+      <WhatIsSection />
+      <ProductFacts />
+      <MariaReginaIntro />
+      <PerspectiveSection />
+      <LiveInvite />
+      <DemoCTA />
+      <FinalWhatsApp />
+    </main>
+  );
+}
+
+function PremiumHero() {
+  return (
+    <section className="min-h-screen grid items-center bg-ivory">
+      <div className="container-wide grid gap-8 md:grid-cols-[1fr_0.9fr] py-20">
+        <div className="flex flex-col justify-center">
+          <h1 className="font-display text-[3rem] leading-tight md:text-[4.6rem]">
+            Conoce Thermomix
+            <br />
+            <span className="italic">de una forma diferente.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+            Te enseño cómo funciona, qué puede hacer en tu cocina y por qué tantas personas
+            cambian su forma de cocinar después de probarla.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <WhatsAppLink source="demonstration" variant="solid" extra={"Hola María Regina, vi tu página y me gustaría conocer Thermomix y agendar una demostración."}>
+              AGENDAR UNA DEMOSTRACIÓN
+            </WhatsAppLink>
+            <a href="#descubrir" className="inline-flex items-center justify-center h-12 px-6 rounded-sm border border-ink/20">
+              DESCUBRIR THERMOMIX
+            </a>
+          </div>
+          <p className="signature mt-10 text-3xl">María Regina</p>
+        </div>
+        <div className="relative">
+          <img src={mariaRegina.url} alt="María Regina" className="w-full h-[32rem] object-cover object-top rounded-sm shadow-lg" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ScrollExperience() {
+  const messages = [
+    { id: "m0", lines: ["THERMOMIX TM7", "Una forma distinta\nde cocinar."], start: 0, end: 0.2 },
+    { id: "m1", lines: ["Pesa.", "Corta.", "Mezcla.", "Cocina."], start: 0.2, end: 0.4 },
+    { id: "m2", lines: ["Una máquina.", "Muchos pasos menos."], start: 0.4, end: 0.6 },
+    { id: "m3", lines: ["Cocina guiada,", "directamente en pantalla."], start: 0.6, end: 0.8 },
+    { id: "m4", lines: ["Pero entenderla de verdad", "requiere verla en acción."], start: 0.8, end: 1 },
+  ];
+
+  // Prefer public path for a video. If a true scrub video is added to /public/videos/thermomix-scrub.mp4 it will be used.
+  const videoSrc = "/videos/thermomix-scrub.mp4";
+  const poster = thermomixEnUso;
+
+  return (
+    <section aria-label="Thermomix cinematic" className="bg-black text-warm-white">
+      <ScrollScrubVideo src={videoSrc} poster={poster} messages={messages} />
+    </section>
+  );
+}
+
+function WhatIsSection() {
+  return (
+    <section id="descubrir" className="container-wide py-20">
+      <h2 className="font-display text-[2.4rem] md:text-[3.6rem]">¿Qué hace Thermomix?</h2>
+      <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+        Thermomix combina precisión, potencia y guía para simplificar lo esencial en tu cocina.
+      </p>
+      <div className="mt-10 grid gap-8 md:grid-cols-3">
+        <div>
+          <h3 className="font-display text-2xl">PESA</h3>
+          <p className="mt-2 text-muted-foreground">Báscula integrada.</p>
+        </div>
+        <div>
+          <h3 className="font-display text-2xl">PREPARA</h3>
+          <p className="mt-2 text-muted-foreground">Corta, mezcla, tritura y amasa.</p>
+        </div>
+        <div>
+          <h3 className="font-display text-2xl">COCINA</h3>
+          <p className="mt-2 text-muted-foreground">Controla tiempo y temperatura.</p>
+        </div>
+        <div>
+          <h3 className="font-display text-2xl">GUÍA</h3>
+          <p className="mt-2 text-muted-foreground">La pantalla te lleva paso a paso.</p>
+        </div>
+        <div>
+          <h3 className="font-display text-2xl">VAPOR</h3>
+          <p className="mt-2 text-muted-foreground">Cocina diferentes alimentos al mismo tiempo.</p>
+        </div>
+        <div>
+          <h3 className="font-display text-2xl">CONECTA</h3>
+          <p className="mt-2 text-muted-foreground">Acceso a Cookidoo y cocina guiada.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProductFacts() {
+  return (
+    <section className="container-wide py-20">
+      <div className="grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
+        <div>
+          <img src={thermomixEnUso} alt="Thermomix" className="w-full h-[28rem] object-cover rounded-sm shadow-lg" />
+        </div>
+        <div>
+          <div className="space-y-6">
+            <div>
+              <div className="text-[2.6rem] font-display">10"</div>
+              <div className="text-sm text-muted-foreground">pantalla multitáctil</div>
+            </div>
+            <div>
+              <div className="text-[2.6rem] font-display">20+</div>
+              <div className="text-sm text-muted-foreground">modos de cocción</div>
+            </div>
+            <div>
+              <div className="text-[2.6rem] font-display">100,000+</div>
+              <div className="text-sm text-muted-foreground">recetas disponibles en Cookidoo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MariaReginaIntro() {
+  return (
+    <section className="border-t border-border py-20 bg-warm-white">
+      <div className="container-wide grid gap-10 md:grid-cols-[1fr_0.9fr] md:items-center">
+        <div>
+          <h2 className="text-[2.4rem] md:text-[3.6rem] font-display">Una cosa es que te cuenten lo que hace.</h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Yo también había escuchado hablar de Thermomix. No fue hasta que la probé que entendí por
+            qué podía cambiar tanto la experiencia de cocinar.
+          </p>
+          <p className="mt-4">Por eso prefiero enseñártela primero.</p>
+          <div className="mt-6">
+            <WhatsAppLink source="demonstration">QUIERO UNA DEMOSTRACIÓN</WhatsAppLink>
+          </div>
+        </div>
+        <div>
+          <img src={mariaRegina.url} alt="María Regina" className="w-full h-[28rem] object-cover rounded-sm shadow-lg" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PerspectiveSection() {
+  // Reuse the existing simple structure but keep it elegant and minimal.
+  const userMonthly = 2400; // placeholder central value; the existing app has a calculator elsewhere
+  const thermomixMonthly = 395.83;
+  const percentage = ((thermomixMonthly / userMonthly) * 100).toFixed(1);
+  return (
+    <section className="container-wide py-20">
+      <h3 className="text-[2rem] font-display">Ponlo en perspectiva.</h3>
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="p-8 bg-ivory rounded-sm shadow-sm">
+          <div className="text-sm uppercase text-muted-foreground">TUS CENAS FUERA</div>
+          <div className="mt-4 text-[2rem] font-display">Q{userMonthly.toLocaleString("es-GT")}</div>
+        </div>
+        <div className="p-8 bg-warm-white rounded-sm shadow-sm">
+          <div className="text-sm uppercase text-muted-foreground">THERMOMIX</div>
+          <div className="mt-4 text-[2rem] font-display">desde Q{thermomixMonthly.toFixed(2)}</div>
+          <div className="mt-3 text-sm text-muted-foreground">Una cuota de referencia equivaldría al {percentage}% del gasto mensual que indicaste.</div>
+          <p className="mt-6 text-[0.75rem] text-muted-foreground">Ejemplo basado en tus datos y precios de referencia. No representa ahorro garantizado.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LiveInvite() {
+  return (
+    <section className="relative py-20 bg-ink text-warm-white">
+      <div className="container-wide grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-center">
+        <div>
+          <div className="label-xs text-champagne">EN VIVO</div>
+          <h3 className="mt-4 text-[2.6rem] font-display">Nos vemos en la cocina.</h3>
+          <p className="mt-4 text-muted-foreground">PRÓXIMO LIVE · Noche Italiana · Jueves · 7:00 PM</p>
+        </div>
+        <div className="flex gap-3">
+          <WhatsAppLink source="lives" extra={"Hola María Regina, vi el próximo Live y me gustaría recibir la información."}>
+            QUIERO RECIBIR EL ENLACE
+          </WhatsAppLink>
+          <a href="/lives" className="inline-flex items-center justify-center h-12 px-6 rounded-sm border border-warm-white/20">VER LIVES ANTERIORES</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DemoCTA() {
+  return (
+    <section className="py-20">
+      <div className="container-wide text-center">
+        <h3 className="font-display text-[2.6rem]">Antes de decidir, pruébala.</h3>
+        <p className="mt-4 text-muted-foreground">Una demostración te permite verla funcionando, hacer preguntas y entender si realmente tiene sentido para tu cocina.</p>
+        <div className="mt-8">
+          <WhatsAppLink source="demonstration" variant="solid">AGENDAR DEMOSTRACIÓN</WhatsAppLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalWhatsApp() {
+  return (
+    <section className="bg-ink text-warm-white py-20">
+      <div className="container-wide grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-center">
+        <div>
+          <h2 className="text-[2.6rem] font-display">¿Cocinamos?</h2>
+          <p className="mt-4 text-muted-foreground">Habla directamente conmigo para agendar una demostración y resolver tus dudas.</p>
+          <div className="mt-6">
+            <WhatsAppLink source="homepage" variant="light">HABLAR CON MARÍA REGINA</WhatsAppLink>
+          </div>
+        </div>
+        <div>
+          <img src={mariaRegina.url} alt="María Regina" className="w-full h-[24rem] object-cover rounded-sm" />
+        </div>
+      </div>
+    </section>
   );
 }
 
