@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Search, X } from "lucide-react";
+import { Instagram, Menu, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { site, track } from "@/lib/site";
 import { BrandLogo } from "./brand";
 import { WhatsAppLink } from "./whatsapp-link";
 
@@ -62,6 +63,16 @@ export function SiteNav() {
           >
             <Search className="size-[17px]" />
           </Link>
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Seguir en Instagram"
+            onClick={() => track("instagram_clicked", { source: "nav" })}
+            className="hidden size-10 items-center justify-center text-foreground/60 transition-colors hover:text-foreground md:inline-flex"
+          >
+            <Instagram className="size-[17px]" />
+          </a>
           <WhatsAppLink source="nav" className="hidden sm:inline-flex" size="sm" showIcon={false}>
             Hablar con María Regina
           </WhatsAppLink>
@@ -93,6 +104,15 @@ export function SiteNav() {
             <WhatsAppLink source="nav" size="lg" className="mb-4 w-full" showIcon={false}>
               Hablar con María Regina
             </WhatsAppLink>
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("instagram_clicked", { source: "nav_mobile" })}
+              className="mb-4 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.2em] text-muted-foreground"
+            >
+              <Instagram className="size-4" /> {site.social.instagramHandle}
+            </a>
           </nav>
         </div>
       )}
