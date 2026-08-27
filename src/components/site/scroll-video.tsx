@@ -100,6 +100,7 @@ function segmentOpacity(progress: number, start: number, end: number, holdToEnd?
 function ScrubExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const bgVideoRef = useRef<HTMLVideoElement>(null);
   const progressRef = useRef(0);
   const currentTimeRef = useRef(0);
   const durationRef = useRef(0);
@@ -113,9 +114,11 @@ function ScrubExperience() {
     const onLoadedMetadata = () => {
       durationRef.current = video.duration || 0;
       // Warm up the decoder so the first scrub isn't the first frame ever rendered (Safari/iOS).
-      const playAttempt = video.play();
-      if (playAttempt && typeof playAttempt.then === "function") {
-        playAttempt.then(() => video.pause()).catch(() => {});
+      for (const v of [videoRef.current, bgVideoRef.current]) {
+        const playAttempt = v?.play();
+        if (playAttempt && typeof playAttempt.then === "function") {
+          playAttempt.then(() => v?.pause()).catch(() => {});
+        }
       }
     };
 
@@ -156,6 +159,10 @@ function ScrubExperience() {
         if (Math.abs(video.currentTime - currentTimeRef.current) > 0.01) {
           video.currentTime = currentTimeRef.current;
         }
+        const bgVideo = bgVideoRef.current;
+        if (bgVideo && Math.abs(bgVideo.currentTime - currentTimeRef.current) > 0.01) {
+          bgVideo.currentTime = currentTimeRef.current;
+        }
       }
 
       segments.forEach((seg, i) => {
@@ -177,6 +184,20 @@ function ScrubExperience() {
   return (
     <section ref={containerRef} className="relative h-[400vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-ink">
+        {/* Blurred, full-bleed backdrop: the source is a square 480x480 clip, so object-cover
+            alone would crop most of the frame away on a wide viewport. This fills edge to edge
+            without hiding the actual shot. */}
+        <video
+          ref={bgVideoRef}
+          src={videoSrc}
+          muted
+          playsInline
+          preload="auto"
+          controls={false}
+          aria-hidden
+          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
+        />
+        {/* True, undistorted frame — the video everyone actually sees. */}
         <video
           ref={videoRef}
           src={videoSrc}
@@ -184,9 +205,9 @@ function ScrubExperience() {
           playsInline
           preload="auto"
           controls={false}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 m-auto h-full max-h-screen w-auto max-w-full object-contain md:h-[92vh] md:w-[92vh]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/10 to-black/50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/5 to-black/55" />
         <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
           {segments.map((seg, i) => (
             <div
@@ -217,7 +238,17 @@ function FallbackVideo() {
           autoPlay
           loop
           preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden
+          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
+        />
+        <video
+          src={videoSrc}
+          muted
+          playsInline
+          autoPlay
+          loop
+          preload="metadata"
+          className="absolute inset-0 m-auto h-auto max-h-full w-[85%] max-w-[24rem] object-contain sm:h-[85%] sm:w-auto"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/25" />
         <div className="absolute inset-0 flex flex-col items-center justify-end gap-5 px-6 pb-10 text-center">
