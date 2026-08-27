@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Instagram } from "lucide-react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
+import mariaRegina from "@/assets/maria-regina.png";
 import mesa from "@/assets/mesa-editorial.jpg";
 import refri from "@/assets/ingredientes-refri.jpg";
 import liveImg from "@/assets/live-italiana.jpg";
