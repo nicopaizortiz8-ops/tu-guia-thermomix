@@ -196,7 +196,7 @@ function ScrubExperience() {
           playsInline
           preload="auto"
           controls={false}
-          className="absolute inset-0 m-auto h-full max-h-screen w-auto max-w-full object-contain md:h-[92vh] md:w-[92vh]"
+          className="absolute inset-0 m-auto h-[80%] max-h-[36rem] w-auto max-w-[85%] object-contain md:h-[62vh] md:w-[62vh] md:max-h-[38rem] md:max-w-[38rem]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/5 to-black/55" />
         <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
@@ -261,7 +261,7 @@ function FallbackVideo() {
           autoPlay
           loop
           preload="metadata"
-          className="absolute inset-0 m-auto h-auto max-h-full w-[85%] max-w-[24rem] object-contain sm:h-[85%] sm:w-auto"
+          className="absolute inset-0 m-auto h-auto max-h-full w-[68%] max-w-[19rem] object-contain sm:h-[65%] sm:w-auto"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/25" />
         <div className="absolute inset-0 flex flex-col items-center justify-end gap-5 px-6 pb-10 text-center">

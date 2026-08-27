@@ -1,8 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Play } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Instagram, Play } from "lucide-react";
 import liveImg from "@/assets/live-italiana.jpg";
 import { recipes } from "@/data/recipes";
-import { track } from "@/lib/site";
+import { site, track } from "@/lib/site";
 import { SectionHeading } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
@@ -46,18 +46,20 @@ function Lives() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href="#"
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => track("live_clicked", { source: "lives_page" })}
-              className="inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
             >
-              Quiero verlo
+              <Instagram className="size-4" /> Quiero verlo
             </a>
-            <button className="inline-flex h-11 items-center rounded-full border border-border px-5 text-sm font-medium hover:bg-secondary">
+            <WhatsAppLink source="lives" variant="outline">
               Recordármelo
-            </button>
+            </WhatsAppLink>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
-            [Enlace al Live pendiente de integración con Instagram.]
+            Los Lives se transmiten en Instagram {site.social.instagramHandle}.
           </p>
         </div>
       </div>
@@ -65,7 +67,14 @@ function Lives() {
       <h2 className="mt-20 text-2xl md:text-3xl">Lives anteriores</h2>
       <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {recipes.slice(1, 7).map((r) => (
-          <div key={r.slug} className="group">
+          <a
+            key={r.slug}
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("instagram_clicked", { source: "lives_past" })}
+            className="group block"
+          >
             <div className="relative overflow-hidden rounded-2xl">
               <img
                 src={r.image}
@@ -80,15 +89,10 @@ function Lives() {
               </span>
             </div>
             <h3 className="mt-4 font-display text-xl">Live: {r.title}</h3>
-            <p className="mt-1 text-xs text-muted-foreground">[Fecha placeholder] · {r.minutes} min</p>
-            <Link
-              to="/recetas/$slug"
-              params={{ slug: r.slug }}
-              className="mt-3 inline-flex text-sm font-medium text-primary"
-            >
-              Ver la receta
-            </Link>
-          </div>
+            <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary">
+              <Instagram className="size-4" /> Ver en Instagram
+            </p>
+          </a>
         ))}
       </div>
 

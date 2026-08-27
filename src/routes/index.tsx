@@ -4,7 +4,7 @@ import mariaRegina from "@/assets/maria-regina.png";
 import liveImg from "@/assets/live-italiana.jpg";
 import funcionesCompletas from "@/assets/image0.jpeg";
 import despieceTM7 from "@/assets/image0 (1).jpeg";
-import { formatQ } from "@/lib/site";
+import { formatQ, site, track } from "@/lib/site";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 import { ScrollVideo } from "@/components/site/scroll-video";
 import {
@@ -436,10 +436,19 @@ function LiveSection() {
               <span>7:00 PM</span>
               <span className="text-champagne">con María Regina</span>
             </div>
-            <div className="mt-9">
+            <div className="mt-9 flex flex-wrap items-center gap-6">
               <WhatsAppLink source="lives" variant="light" showIcon={false}>
                 Quiero recibir el enlace
               </WhatsAppLink>
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("instagram_clicked", { source: "home_live_hero" })}
+                className="editorial-link text-[0.78rem] font-medium uppercase tracking-[0.2em] text-warm-white"
+              >
+                Verlo en Instagram
+              </a>
             </div>
           </div>
         </Reveal>
@@ -447,8 +456,12 @@ function LiveSection() {
         <div className="mt-16 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-warm-white/15 pt-8 text-[0.7rem] uppercase tracking-[0.2em] text-warm-white/40">
           <span>Lives anteriores</span>
           <span className="text-warm-white/25">·</span>
-          <ArrowLink to="/lives" tone="light">
-            Ver todos
+          <ArrowLink
+            href={site.social.instagram}
+            tone="light"
+            onClick={() => track("instagram_clicked", { source: "home_lives" })}
+          >
+            Ver en Instagram
           </ArrowLink>
         </div>
       </div>
