@@ -11,8 +11,7 @@ export const site = {
     fullName: "María Regina",
     location: "Ciudad de Guatemala",
   },
-  // PLACEHOLDER: número de WhatsApp real (formato internacional, sin +)
-  whatsappNumber: "50200000000",
+  whatsappNumber: "50254141172",
   social: {
     instagramHandle: "@yousothermomix",
     instagram: "https://instagram.com/yousothermomix", // PLACEHOLDER

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
-import enUso from "@/assets/thermomix-en-uso.jpg";
+import mariaRegina from "@/assets/maria-regina.png";
+import enUso from "@/assets/ingredientes-refri.jpg";
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
 import pan from "@/assets/receta-pan.jpg";
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/thermomix")({
   component: ThermomixPage,
 });
 
-const REF_CUOTA = 395.83;
+export const REF_CUOTA = 395.83;
 
 const q = (n: number) =>
   `Q${n.toLocaleString("es-GT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -102,7 +102,7 @@ function Hero() {
         </div>
         <div className="hover-zoom">
           <img
-            src={mariaRegina.url}
+            src={mariaRegina}
             alt="María Regina en su cocina con su Thermomix"
             width={1200}
             height={1500}
@@ -1130,7 +1130,7 @@ function Cierre() {
     <section className="container-wide grid items-center gap-12 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:py-32">
       <div className="hover-zoom">
         <img
-          src={mariaRegina.url}
+          src={mariaRegina}
           alt="María Regina"
           loading="lazy"
           className="aspect-[4/5] w-full object-cover"
