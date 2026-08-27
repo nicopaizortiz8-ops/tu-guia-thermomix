@@ -225,9 +225,7 @@ export function RecipeCard({
           )}
         />
       </div>
-      <p className="mt-4 text-[0.62rem] uppercase tracking-[0.28em] text-champagne">
-        {recipe.minutes} min · {recipe.difficulty}
-      </p>
+      <p className="mt-4 text-[0.62rem] uppercase tracking-[0.28em] text-champagne">Ejemplo</p>
       <h3
         className={cn(
           "mt-2 font-display leading-tight",
