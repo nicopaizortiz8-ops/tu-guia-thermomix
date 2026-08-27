@@ -76,7 +76,7 @@
   --radius: 0.25rem;
 
   /* #F7F4EE */
-  --ivory: oklch(0.963 0.008 85);
+  --ivory: oklch(0.955 0.010 82); /* slightly warmer to better match logo tone */
   /* #FFFDFC */
   --warm-white: oklch(0.995 0.003 40);
   /* #1C1B19 */

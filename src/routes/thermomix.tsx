@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
-import enUso from "@/assets/thermomix-en-uso.jpg";
+import React, { useMemo, useState, useRef, useEffect } from "react";
+import mariaReginaImg from "@/assets/maria-regina.png";
+import enUso from "@/assets/amigos-en-casa.jpg";
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
 import pan from "@/assets/receta-pan.jpg";
 import mesa from "@/assets/mesa-editorial.jpg";
+import heroVideo from "@/assets/VIDEO-2025-09-01-17-12-24.mp4";
 import {
   ArrowLink,
   Chip,
@@ -48,6 +49,7 @@ function ThermomixPage() {
   return (
     <div>
       <Hero />
+      <ScrollVideoThermomix />
       <MiHistoria />
       <PorQueYoUso />
       <QueEs />
@@ -62,6 +64,96 @@ function ThermomixPage() {
       <DespuesDeComprar />
       <Cierre />
     </div>
+  );
+}
+
+/* Scroll-driven video section — full-bleed, sticky, scrubbed by scroll */
+function ScrollVideoThermomix() {
+  const containerRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const raf = useRef<number | null>(null);
+  const [metaReady, setMetaReady] = useState(false);
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  useEffect(() => {
+    if (prefersReduced) return;
+    const handle = () => {
+      if (raf.current) return;
+      raf.current = requestAnimationFrame(() => {
+        raf.current = null;
+        const container = containerRef.current;
+        const video = videoRef.current;
+        if (!container || !video || !metaReady) return;
+        const rect = container.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const total = rect.height - vh;
+        // progress measured from top of container entering viewport to fully scrolled
+        const scrolled = Math.min(1, Math.max(0, (vh - rect.top) / (total || vh)));
+        const t = Math.max(0, Math.min(1, scrolled));
+        // end the playback 10s before file end
+        const dur = video.duration || 0;
+        const effective = Math.max(0, dur - 10);
+        video.currentTime = t * effective;
+        // update ended flag when we reach near the effective end
+        const isNowEnded = t >= 0.995;
+        if (isNowEnded !== endedRef.current) {
+          endedRef.current = isNowEnded;
+          setEnded(isNowEnded);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handle, { passive: true });
+    window.addEventListener('resize', handle, { passive: true });
+    handle();
+    return () => {
+      window.removeEventListener('scroll', handle);
+      window.removeEventListener('resize', handle);
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
+  }, [metaReady, prefersReduced]);
+
+  const [ended, setEnded] = useState(false);
+  const endedRef = useRef(false);
+  const onLoadedMeta = () => {
+    setMetaReady(true);
+    if (videoRef.current) videoRef.current.currentTime = 0;
+  };
+
+  if (prefersReduced) {
+    // reduced motion fallback: simple full-width autoplay muted video with controls
+    return (
+      <section id="tm-video" className="relative">
+        <video src={String(heroVideo)} playsInline muted preload="metadata" controls className="w-full h-auto object-cover" />
+      </section>
+    );
+  }
+
+  return (
+    <section ref={containerRef as any} id="tm-video" style={{ height: '380vh' }} className="relative">
+      <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <video
+          ref={videoRef}
+          src={String(heroVideo)}
+          muted
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={onLoadedMeta}
+          // Use contain so the video is shown at natural scale and not cropped
+          style={{ width: '100%', height: '100%', objectFit: 'contain', willChange: 'transform', maxWidth: '1920px' }}
+        />
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: ended ? 1 : 0, transition: 'opacity 600ms' }}>
+          <div className="text-center pointer-events-auto">
+            {ended && (
+              <WhatsAppLink source="demonstration" size="lg" showIcon={false}>
+                AGENDAR DEMOSTRACIÓN
+              </WhatsAppLink>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -102,7 +194,7 @@ function Hero() {
         </div>
         <div className="hover-zoom">
           <img
-            src={mariaRegina.url}
+            src={mariaReginaImg}
             alt="María Regina en su cocina con su Thermomix"
             width={1200}
             height={1500}

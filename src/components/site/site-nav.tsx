@@ -10,7 +10,6 @@ const links = [
   { to: "/ai-kitchen", label: "¿Qué cocinamos?" },
   { to: "/recetas", label: "Recetas" },
   { to: "/lives", label: "Lives" },
-  { to: "/thermomix", label: "Conoce Thermomix" },
   { to: "/sobre-mi", label: "María Regina" },
 ] as const;
 
@@ -62,13 +61,6 @@ export function SiteNav() {
           >
             <Search className="size-[17px]" />
           </Link>
-          <Link
-            to="/mi-cocina"
-            className="hidden items-center gap-1.5 px-2 text-[0.72rem] uppercase tracking-[0.18em] text-foreground/60 transition-colors hover:text-foreground xl:inline-flex"
-          >
-            <UserRound className="size-4" />
-            Iniciar sesión
-          </Link>
           <WhatsAppLink source="nav" className="hidden sm:inline-flex" size="sm" showIcon={false}>
             Hablar con María Regina
           </WhatsAppLink>
@@ -97,12 +89,6 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              to="/mi-cocina"
-              className="py-4 text-[0.72rem] uppercase tracking-[0.2em] text-muted-foreground"
-            >
-              Iniciar sesión
-            </Link>
             <WhatsAppLink source="nav" size="lg" className="mb-4 w-full" showIcon={false}>
               Hablar con María Regina
             </WhatsAppLink>

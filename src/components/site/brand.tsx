@@ -1,18 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
-/** The supplied Yo Uso Thermomix logo. Used as provided, never redrawn. */
+/** Render a large typographic site title instead of the logo artwork */
 export function BrandLogo({ className }: { className?: string }) {
   return (
-    <Link to="/" aria-label="Yo Uso Thermomix, con María Regina" className={cn("block", className)}>
-      <img
-        src={logo.url}
-        alt="Yo Uso Thermomix — con María Regina"
-        width={1200}
-        height={579}
-        className="h-10 w-auto md:h-12"
-      />
+    <Link to="/" aria-label="Yo Uso Thermomix" className={cn("block", className)}>
+      <div className="mx-auto md:mx-0 p-2 rounded-sm flex items-center" style={{ maxWidth: 420 }}>
+        <div>
+          <p className="font-display text-[1.65rem] md:text-[2.4rem] leading-none uppercase tracking-[0.06em] text-foreground">Yo Uso</p>
+          <p className="font-display text-[1.15rem] md:text-[1.6rem] leading-none uppercase tracking-[0.18em] text-olive">Thermomix</p>
+          <p className="signature mt-2 text-base md:text-2xl">con María Regina</p>
+        </div>
+      </div>
     </Link>
   );
 }

@@ -47,7 +47,6 @@ export function SiteFooter() {
             title="Descubrir"
             items={[
               { to: "/lives", label: "Lives" },
-              { to: "/thermomix", label: "Conoce Thermomix" },
               { to: "/sobre-mi", label: "María Regina" },
             ]}
           />
@@ -63,8 +62,7 @@ export function SiteFooter() {
         <div className="mt-16 space-y-4 border-t border-warm-white/15 pt-10 text-[0.72rem] leading-relaxed text-warm-white/45">
           <p className="max-w-3xl">
             Yo Uso Thermomix es una iniciativa independiente de María Regina, consultora de
-            Thermomix en Guatemala. [Texto de divulgación pendiente de confirmación.] Las recetas e
-            ideas generadas con herramientas automáticas son sugerencias y pueden requerir ajustes.
+            Thermomix en Guatemala. Las recetas e ideas generadas con herramientas automáticas son sugerencias y pueden requerir ajustes.
             Los cálculos de costos y tiempos son estimaciones.
           </p>
           <div className="flex flex-wrap gap-x-8 gap-y-2 pt-2 uppercase tracking-[0.2em]">
