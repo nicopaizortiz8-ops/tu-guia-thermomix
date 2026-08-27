@@ -25,7 +25,7 @@ function SobreMi() {
     <div className="container-page py-12 md:py-20">
       <div className="grid gap-10 md:grid-cols-[0.9fr_1fr] md:gap-16">
         <img
-          src={mariaRegina.url}
+          src={mariaRegina}
           alt={`${site.consultant.name}, consultora independiente de Thermomix`}
           loading="lazy"
           className="w-full rounded-[1.5rem] object-cover"

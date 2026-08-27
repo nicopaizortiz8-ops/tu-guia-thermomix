@@ -7,7 +7,7 @@ export function BrandLogo({ className }: { className?: string }) {
   return (
     <Link to="/" aria-label="Yo Uso Thermomix, con María Regina" className={cn("block", className)}>
       <img
-        src={logo.url}
+        src={logo}
         alt="Yo Uso Thermomix — con María Regina"
         width={1200}
         height={579}
