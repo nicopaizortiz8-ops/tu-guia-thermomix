@@ -12,7 +12,7 @@ type Segment = {
 const segments: Segment[] = [
   {
     start: 0,
-    end: 0.15,
+    end: 0.18,
     render: () => (
       <p className="font-display text-[2.6rem] uppercase tracking-[0.06em] text-warm-white md:text-[6rem]">
         Thermomix TM7
@@ -20,19 +20,8 @@ const segments: Segment[] = [
     ),
   },
   {
-    start: 0.15,
-    end: 0.35,
-    render: () => (
-      <p className="max-w-2xl font-display text-[2rem] italic leading-[1.2] text-warm-white md:text-[3.8rem]">
-        Una máquina.
-        <br />
-        Muchas cosas menos.
-      </p>
-    ),
-  },
-  {
-    start: 0.35,
-    end: 0.55,
+    start: 0.18,
+    end: 0.42,
     render: () => (
       <p className="max-w-xl font-display text-[2.2rem] uppercase leading-[1.2] tracking-tight text-warm-white md:text-[4.2rem]">
         Pesa.
@@ -46,8 +35,8 @@ const segments: Segment[] = [
     ),
   },
   {
-    start: 0.55,
-    end: 0.75,
+    start: 0.42,
+    end: 0.65,
     render: () => (
       <p className="max-w-2xl font-display text-[2rem] italic leading-[1.2] text-warm-white md:text-[3.8rem]">
         Menos pasos.
@@ -57,8 +46,8 @@ const segments: Segment[] = [
     ),
   },
   {
-    start: 0.75,
-    end: 0.9,
+    start: 0.65,
+    end: 0.85,
     render: () => (
       <p className="max-w-2xl font-display text-[2.2rem] leading-[1.15] text-warm-white md:text-[4.4rem]">
         Hay que verla
@@ -68,7 +57,7 @@ const segments: Segment[] = [
     ),
   },
   {
-    start: 0.9,
+    start: 0.85,
     end: 1,
     holdToEnd: true,
     render: () => (
@@ -112,7 +101,9 @@ function ScrubExperience() {
     if (!video) return;
 
     const onLoadedMetadata = () => {
-      durationRef.current = video.duration || 0;
+      // End the scrub 5s before the clip's true end (a clean cut, not the raw file's last frames).
+      const raw = video.duration || 0;
+      durationRef.current = raw > 5 ? raw - 5 : raw;
       // Warm up the decoder so the first scrub isn't the first frame ever rendered (Safari/iOS).
       for (const v of [videoRef.current, bgVideoRef.current]) {
         const playAttempt = v?.play();
@@ -226,12 +217,33 @@ function ScrubExperience() {
   );
 }
 
+/** Loops a video but cuts 5s before its true end instead of playing to the last frame. */
+function useTrimmedLoop() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    const onTimeUpdate = () => {
+      const trimmedEnd = video.duration - 5;
+      if (video.duration > 5 && video.currentTime >= trimmedEnd) {
+        video.currentTime = 0;
+      }
+    };
+    video.addEventListener("timeupdate", onTimeUpdate);
+    return () => video.removeEventListener("timeupdate", onTimeUpdate);
+  }, []);
+  return ref;
+}
+
 /** Mobile / reduced-motion fallback: plain inline muted looping video, no scroll-jacking. */
 function FallbackVideo() {
+  const bgRef = useTrimmedLoop();
+  const fgRef = useTrimmedLoop();
   return (
     <section className="relative w-full overflow-hidden bg-ink">
       <div className="relative aspect-[3/4] w-full sm:aspect-video">
         <video
+          ref={bgRef}
           src={videoSrc}
           muted
           playsInline
@@ -242,6 +254,7 @@ function FallbackVideo() {
           className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
         />
         <video
+          ref={fgRef}
           src={videoSrc}
           muted
           playsInline

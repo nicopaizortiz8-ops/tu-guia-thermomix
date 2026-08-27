@@ -205,7 +205,7 @@ const q = (n: number) =>
   `Q${n.toLocaleString("es-GT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const comparaciones: [string, string, string, string][] = [
-  ["Yogurt", "~Q180", "~Q65", "~Q115"],
+  ["Yogurt natural (1 L)", "~Q25", "~Q18", "~Q7"],
   ["Pan", "precio pendiente", "precio pendiente", "estimación parcial"],
   ["Salsa de tomate", "precio pendiente", "precio pendiente", "estimación parcial"],
   ["Masa de pizza", "precio pendiente", "precio pendiente", "estimación parcial"],
@@ -341,8 +341,10 @@ function ValueNumbers() {
             </table>
           </div>
           <p className="mt-6 text-[0.7rem] leading-relaxed text-muted-foreground">
-            Valores estimados donde se indica. Los costos reales varían según ingredientes, marcas
-            y establecimientos.
+            Yogurt: precio de supermercado basado en yogurt natural en presentación de 1 L (Paiz /
+            Walmart Guatemala). Hecho en casa: leche entera + cultivo, según precio de leche
+            entera reportado en supermercados de Guatemala. Los costos reales varían según
+            ingredientes, marcas, promociones y establecimientos.
           </p>
         </Reveal>
       </div>

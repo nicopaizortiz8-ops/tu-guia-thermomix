@@ -261,10 +261,7 @@ function QueEs() {
           <span className="italic text-cognac">Y mucho más.</span>
         </p>
         <p className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Un solo equipo. Muchas formas de cocinar.
-          <span className="ml-2 text-[0.68rem] uppercase tracking-[0.2em] text-champagne">
-            [Confirmar número exacto de funciones con Thermomix Guatemala]
-          </span>
+          Un solo equipo. Más de 20 modos de cocción, según información oficial de Thermomix.
         </p>
       </Reveal>
 
@@ -327,7 +324,7 @@ function Tecnologia() {
         </ul>
 
         <p className="mt-10 text-[0.68rem] uppercase tracking-[0.2em] text-champagne/80">
-          [Verificar con Thermomix Guatemala las especificaciones del modelo disponible]
+          Especificaciones según información oficial de Thermomix
         </p>
 
         <div className="mt-16 border-t border-warm-white/15 pt-14">
@@ -371,10 +368,7 @@ function Cookidoo() {
         </p>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
           Las fuentes oficiales de Thermomix hacen referencia a más de 100,000 recetas a nivel
-          global.
-          <span className="ml-2 text-[0.68rem] uppercase tracking-[0.2em] text-champagne">
-            [Verificar con Thermomix Guatemala]
-          </span>
+          global, disponibles a través de Cookidoo.
         </p>
         <div className="mt-9">
           <WhatsAppLink source="demonstration" variant="outline">

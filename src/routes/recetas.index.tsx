@@ -42,7 +42,7 @@ function Recetas() {
       <SectionHeading
         eyebrow="Recetario"
         title="Recetas para disfrutar."
-        description="Recetas que cocino de verdad en casa, con los pasos y ajustes que uso en el vaso."
+        description="Ejemplos de lo que cocino con Thermomix. Escríbeme por WhatsApp para el paso a paso completo."
       />
 
       <div className="mt-10 flex flex-col gap-5">
