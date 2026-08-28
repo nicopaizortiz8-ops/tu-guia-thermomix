@@ -101,9 +101,7 @@ function ScrubExperience() {
     if (!video) return;
 
     const onLoadedMetadata = () => {
-      // End the scrub 5s before the clip's true end (a clean cut, not the raw file's last frames).
-      const raw = video.duration || 0;
-      durationRef.current = raw > 5 ? raw - 5 : raw;
+      durationRef.current = video.duration || 0;
       // Warm up the decoder so the first scrub isn't the first frame ever rendered (Safari/iOS).
       for (const v of [videoRef.current, bgVideoRef.current]) {
         const playAttempt = v?.play();
@@ -217,33 +215,12 @@ function ScrubExperience() {
   );
 }
 
-/** Loops a video but cuts 5s before its true end instead of playing to the last frame. */
-function useTrimmedLoop() {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    const onTimeUpdate = () => {
-      const trimmedEnd = video.duration - 5;
-      if (video.duration > 5 && video.currentTime >= trimmedEnd) {
-        video.currentTime = 0;
-      }
-    };
-    video.addEventListener("timeupdate", onTimeUpdate);
-    return () => video.removeEventListener("timeupdate", onTimeUpdate);
-  }, []);
-  return ref;
-}
-
 /** Mobile / reduced-motion fallback: plain inline muted looping video, no scroll-jacking. */
 function FallbackVideo() {
-  const bgRef = useTrimmedLoop();
-  const fgRef = useTrimmedLoop();
   return (
     <section className="relative w-full overflow-hidden bg-ink">
       <div className="relative aspect-[3/4] w-full sm:aspect-video">
         <video
-          ref={bgRef}
           src={videoSrc}
           muted
           playsInline
@@ -254,7 +231,6 @@ function FallbackVideo() {
           className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
         />
         <video
-          ref={fgRef}
           src={videoSrc}
           muted
           playsInline
