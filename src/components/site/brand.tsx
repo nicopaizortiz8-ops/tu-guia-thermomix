@@ -9,9 +9,9 @@ export function BrandLogo({ className }: { className?: string }) {
       <img
         src={logo}
         alt="Yo Uso Thermomix — con María Regina"
-        width={1200}
-        height={579}
-        className="h-10 w-auto md:h-12"
+        width={100}
+        height={379}
+        className="animate-soft-fade h-10 w-auto mix-blend-multiply opacity-70 md:h-32"
       />
     </Link>
   );

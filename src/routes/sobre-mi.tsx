@@ -39,7 +39,7 @@ function SobreMi() {
             <p>
               Soy consultora independiente de Thermomix en {site.consultant.location}. Empecé
               compartiendo en Instagram lo que cocinaba en casa y hoy es una comunidad que cocina
-              conmigo cada semana.
+              conmigo cada 15 dias.
             </p>
             <p>[Placeholder: historia personal, años cocinando y por qué empezó todo.]</p>
             <p>

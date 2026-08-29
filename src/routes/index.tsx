@@ -116,8 +116,8 @@ function QueEsThermomix() {
           <span className="italic">en una sola máquina.</span>
         </h2>
         <p className="mt-7 max-w-xl text-[1.05rem] leading-relaxed text-muted-foreground">
-          Thermomix reúne preparación, cocción, báscula, temperatura y cocina guiada en un solo
-          equipo.
+          Thermomix reúne preparación, cocción, báscula, temperatura, cocina guiada, entre otras cosas, en un solo equipo.
+      
         </p>
       </Reveal>
 
@@ -139,8 +139,8 @@ function QueEsThermomix() {
 const highlights = [
   { n: "10\"", l: "Pantalla multitáctil" },
   { n: "20+", l: "Modos de cocción" },
-  { n: "100,000+", l: "Recetas guiadas en Cookidoo" },
-  { n: "6.8 L", l: "Capacidad de cocción al vapor" },
+  { n: "110,000+", l: "Recetas guiadas en Cookidoo" },
+  { n: "2.2 L", l: "Capacidad de cocción en el vaso" },
 ];
 
 function TM7Highlights() {
@@ -373,7 +373,7 @@ function MariaReginaSection() {
             María Regina
           </Label>
           <h2 className="mt-6 text-[2.4rem] leading-[0.95] text-warm-white md:text-[3.8rem]">
-            Yo tampoco entendí
+            Yo tampoco entendia
             <br />
             <span className="italic text-champagne">Thermomix hasta probarla.</span>
           </h2>
@@ -422,7 +422,7 @@ function LiveSection() {
           <div className="hover-zoom">
             <img
               src={liveImg}
-              alt="Próximo live: Noche italiana"
+              alt="Próximo live: Consula en mi pagina de instagram"
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
@@ -432,11 +432,11 @@ function LiveSection() {
               Próximo live
             </p>
             <h3 className="mt-4 font-display text-[2.4rem] leading-[0.95] text-warm-white md:text-[3.4rem]">
-              Noche italiana
+              Consulta en mi pagina de instagram
             </h3>
             <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-[0.72rem] uppercase tracking-[0.2em] text-warm-white/70">
-              <span>Jueves</span>
-              <span>7:00 PM</span>
+              <span>Martes</span>
+              <span>6:00 PM</span>
               <span className="text-champagne">con María Regina</span>
             </div>
             <div className="mt-9 flex flex-wrap items-center gap-6">

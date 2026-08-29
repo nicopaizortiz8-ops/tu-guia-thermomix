@@ -252,8 +252,8 @@ function QueEs() {
           <span className="italic">Thermomix?</span>
         </h2>
         <p className="mt-7 max-w-xl text-[1.05rem] leading-relaxed text-muted-foreground">
-          Thermomix TM7 es un sistema de cocina todo-en-uno que combina preparación, cocción,
-          precisión y cocina guiada en un solo equipo.
+          Thermomix TM7 es un robot de cocina todo-en-uno que combina preparación, cocción,
+          precisión, cocina guiada, entre otras cosas, en un solo equipo.
         </p>
       </Reveal>
 
@@ -265,7 +265,7 @@ function QueEs() {
           <span className="italic text-cognac">Y mucho más.</span>
         </p>
         <p className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Un solo equipo. Más de 20 modos de cocción, según información oficial de Thermomix.
+          Un solo equipo. Más de 25 funciones.
         </p>
       </Reveal>
 
@@ -274,7 +274,7 @@ function QueEs() {
           onClick={() => setOpen((v) => !v)}
           className="editorial-link text-[0.78rem] font-medium uppercase tracking-[0.2em]"
         >
-          {open ? "Ocultar funciones" : "Ver todas las funciones →"}
+          {open ? "Ocultar funciones" : "Ver algunas funciones →"}
         </button>
         {open && (
           <ul className="mt-10 grid gap-x-16 border-t border-border sm:grid-cols-2">
@@ -312,7 +312,7 @@ function Tecnologia() {
           <span className="text-champagne">Por dentro</span>
         </Label>
         <h2 className="mt-7 max-w-3xl text-[2.3rem] leading-[0.95] text-warm-white md:text-[4rem]">
-          Tecnología que casi desaparece
+          Tecnología que te acompaña 
           <br />
           <span className="italic text-champagne">mientras cocinas.</span>
         </h2>
@@ -371,7 +371,7 @@ function Cookidoo() {
           velocidad.
         </p>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
-          Las fuentes oficiales de Thermomix hacen referencia a más de 100,000 recetas a nivel
+          Las fuentes oficiales de Thermomix hacen referencia a más de 110,000 recetas a nivel
           global, disponibles a través de Cookidoo.
         </p>
         <div className="mt-9">
@@ -448,7 +448,7 @@ const escenas = [
   {
     k: "Martes · 7:15 PM",
     t: "No sabes qué hacer de cena.",
-    d: "La cocina guiada reduce la fricción de decidir: eliges una receta y la sigues paso a paso.",
+    d: "La cocina guiada  te ayuda a decidir: eliges una receta y la sigues paso a paso.",
     img: cocina,
   },
   {
