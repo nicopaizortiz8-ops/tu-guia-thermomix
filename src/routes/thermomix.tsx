@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
+import mariaRegina from "@/assets/maria-regina.png";
 import enUso from "@/assets/thermomix-en-uso.jpg";
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
