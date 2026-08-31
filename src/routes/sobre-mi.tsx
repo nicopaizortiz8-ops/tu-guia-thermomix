@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
-import mariaRegina from "@/assets/maria-regina.png.asset.json";
+import mariaRegina from "@/assets/maria-regina.png";
 import { site, track } from "@/lib/site";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
 
