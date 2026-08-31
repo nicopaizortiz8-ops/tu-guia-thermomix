@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 import { cn } from "@/lib/utils";
 
 /** The supplied Yo Uso Thermomix logo. Used as provided, never redrawn. */
