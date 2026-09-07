@@ -1,11 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import mariaRegina from "@/assets/maria-regina.png";
-<<<<<<< HEAD
-import enUso from "@/assets/thermomix-en-uso.jpg";
-=======
 import enUso from "@/assets/ingredientes-refri.jpg";
->>>>>>> 0e10970 (Redesign homepage as a cinematic Thermomix TM7 demo funnel)
 import amigos from "@/assets/amigos-en-casa.jpg";
 import cocina from "@/assets/cocina-mediterranea.jpg";
 import pan from "@/assets/receta-pan.jpg";
@@ -547,6 +543,7 @@ function QueCambia() {
         </Disclaimer>
       </div>
     </section>
+    
   );
 }
 
