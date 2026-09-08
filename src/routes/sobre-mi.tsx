@@ -41,7 +41,7 @@ function SobreMi() {
               compartiendo en Instagram lo que cocinaba en casa y hoy es una comunidad que cocina
               conmigo cada 15 dias.
             </p>
-            <p>[Placeholder: historia personal, años cocinando y por qué empezó todo.]</p>
+            <p></p>
             <p>
               Me gusta la cocina de todos los días: la que se resuelve rápido, sabe a casa y no
               obliga a lavar media cocina. Comparto recetas, trucos y Lives donde probamos ideas
