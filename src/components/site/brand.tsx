@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { MachineDrawing } from "./machine-drawing";
+import { Tm7Icon } from "./tm7-icon";
 import { cn } from "@/lib/utils";
 
 /** Compact wordmark that stays legible at every navigation size. */
@@ -10,7 +10,7 @@ export function BrandLogo({ className }: { className?: string }) {
       aria-label="Yo Uso Thermomix, con María Regina"
       className={cn("brand-mark", className)}
     >
-      <MachineDrawing className="brand-machine" />
+      <Tm7Icon className="brand-machine" />
       <span className="brand-words">
         <span className="brand-title">
           Yo Uso <span>Thermomix</span>
