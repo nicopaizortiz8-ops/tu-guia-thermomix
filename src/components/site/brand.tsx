@@ -1,18 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import { MachineDrawing } from "./machine-drawing";
 import { cn } from "@/lib/utils";
 
-/** The supplied Yo Uso Thermomix logo. Used as provided, never redrawn. */
+/** Compact wordmark that stays legible at every navigation size. */
 export function BrandLogo({ className }: { className?: string }) {
   return (
-    <Link to="/" aria-label="Yo Uso Thermomix, con María Regina" className={cn("block", className)}>
-      <img
-        src={logo}
-        alt="Yo Uso Thermomix — con María Regina"
-        width={100}
-        height={379}
-        className="animate-soft-fade h-10 w-auto mix-blend-multiply opacity-70 md:h-32"
-      />
+    <Link
+      to="/"
+      aria-label="Yo Uso Thermomix, con María Regina"
+      className={cn("brand-mark", className)}
+    >
+      <MachineDrawing className="brand-machine" />
+      <span className="brand-words">
+        <span className="brand-title">
+          Yo Uso <span>Thermomix</span>
+        </span>
+        <span className="brand-signature">con María Regina</span>
+      </span>
     </Link>
   );
 }

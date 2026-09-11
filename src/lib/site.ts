@@ -22,6 +22,7 @@ export const site = {
 } as const;
 
 export type WhatsAppSource =
+  | "question"
   | "homepage"
   | "nav"
   | "footer"
@@ -43,10 +44,12 @@ export type WhatsAppSource =
   | "time_calculator";
 
 const messages: Record<WhatsAppSource, string> = {
+  question: "Hola María Regina, tengo una pregunta:",
   homepage: "Hola María Regina, vi tu página y me gustaría conocer más sobre Thermomix.",
   nav: "Hola María Regina, me gustaría hacerte una consulta.",
   footer: "Hola María Regina, tengo una duda sobre Thermomix.",
-  savings_calculator: "Hola María Regina, quiero entender dónde podría optimizar mi gasto cocinando más en casa.",
+  savings_calculator:
+    "Hola María Regina, quiero entender dónde podría optimizar mi gasto cocinando más en casa.",
   recipe: "Hola María Regina, quiero saber cómo preparar esta receta.",
   recipe_generator: "Hola María Regina, estuve buscando ideas para cocinar y tengo una duda.",
   thermomix_quiz: "Hola María Regina, hice el test y quiero ver la Thermomix funcionando.",

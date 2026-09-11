@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import mesa from "@/assets/mesa-editorial.jpg";
-import refri from "@/assets/ingredientes-refri.jpg";
+import { MachineDrawing } from "@/components/site/machine-drawing";
 import { IdeasMeter, Label, SectionHeading } from "@/components/site/ui-bits";
 import { track } from "@/lib/site";
 
@@ -37,54 +37,28 @@ type Tile = {
 const tiles: Tile[] = [
   {
     index: "01",
-    title: "Tengo estos ingredientes",
-    desc: "Dime qué tienes en casa y encontremos qué cocinar.",
-    cta: "Dame ideas",
-    to: "/ai-kitchen/crear-receta",
-    image: mesa,
-    className: "md:col-span-2 md:row-span-2",
-    large: true,
-  },
-  {
-    index: "02",
-    title: "Vacía mi refri",
-    desc: "Antes de tirarlo, cocinémoslo.",
-    cta: "Aprovechar ingredientes",
-    to: "/ai-kitchen/vacia-mi-refri",
-    image: refri,
-    className: "md:row-span-2",
-  },
-  {
-    index: "03",
-    title: "Planea mi semana",
-    desc: "Un menú que sí puedas cumplir.",
-    cta: "Planear",
-    to: "/ai-kitchen/plan-semanal",
-  },
-  {
-    index: "04",
     title: "Calcula mi ahorro",
     desc: "Dónde se va tu presupuesto de comida.",
     cta: "Calcular",
     to: "/ai-kitchen/ahorro",
-    className: "md:col-span-2",
+    image: mesa,
   },
   {
-    index: "05",
+    index: "02",
     title: "¿Lo compro o lo hago?",
     desc: "Compara el súper con lo hecho en casa.",
     cta: "Comparar",
     to: "/ai-kitchen/hazlo-en-casa",
   },
   {
-    index: "06",
+    index: "03",
     title: "Preguntar",
     desc: "Dudas de recetas, ingredientes y técnicas.",
     cta: "Preguntar",
     to: "/ai-kitchen/preguntame",
   },
   {
-    index: "07",
+    index: "04",
     title: "Tu tiempo en la cocina",
     desc: "Qué tareas podrías simplificar.",
     cta: "Ver mi tiempo",
@@ -102,13 +76,13 @@ function QueCocinamosPage() {
         aside={<IdeasMeter used={3} total={5} />}
       />
 
-      <div className="mt-14 grid auto-rows-[13rem] gap-px bg-border md:grid-cols-3">
+      <div className="kitchen-grid mt-10 grid gap-5 md:grid-cols-2">
         {tiles.map((t) => (
           <Link
             key={t.to}
             to={t.to}
             onClick={() => track("ai_tool_opened", { tool: t.to, from: "que_cocinamos" })}
-            className={`group relative flex flex-col justify-between overflow-hidden bg-background p-7 transition-colors duration-500 hover:bg-warm-white ${t.className ?? ""}`}
+            className={`kitchen-tile group relative flex min-h-64 flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-7 transition-colors duration-500 hover:bg-warm-white ${t.className ?? ""}`}
           >
             {t.image && (
               <img
@@ -120,13 +94,16 @@ function QueCocinamosPage() {
               />
             )}
             <span className="relative num-index">{t.index}</span>
+            <MachineDrawing className="absolute right-7 top-6 h-20 w-20 text-olive/30" />
             <div className="relative">
               <h2
                 className={`font-display uppercase leading-[0.98] tracking-tight ${t.large ? "text-[2.2rem] md:text-[3.2rem]" : "text-[1.5rem]"}`}
               >
                 {t.title}
               </h2>
-              <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                {t.desc}
+              </p>
               <span className="editorial-link mt-4 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.2em] text-cognac">
                 {t.cta} <span aria-hidden>→</span>
               </span>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { categories, recipes } from "@/data/recipes";
+import { newRecipes } from "@/data/new-recipes";
 import { Chip, RecipeCard, SectionHeading } from "@/components/site/ui-bits";
 
 export const Route = createFileRoute("/recetas/")({
@@ -23,35 +24,47 @@ export const Route = createFileRoute("/recetas/")({
   component: Recetas,
 });
 
+const normalizeSearch = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
 function Recetas() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
 
   const list = useMemo(
     () =>
-      recipes.filter(
+      [
+        ...newRecipes,
+        ...recipes.filter((recipe) => !newRecipes.some((added) => added.slug === recipe.slug)),
+      ].filter(
         (r) =>
           (!cat || r.categories.includes(cat)) &&
-          (!q || r.title.toLowerCase().includes(q.toLowerCase())),
+          (!q || normalizeSearch(r.title + " " + r.description).includes(normalizeSearch(q))),
       ),
     [q, cat],
   );
 
   return (
-    <div className="container-page py-12 md:py-20">
+    <div className="recipe-collection container-page py-12 md:py-20">
       <SectionHeading
         eyebrow="Recetario"
         title="Recetas para disfrutar."
         description="Ejemplos de lo que cocino con Thermomix. Escríbeme por WhatsApp para el paso a paso completo."
       />
 
-      <div className="mt-10 flex flex-col gap-5">
+      <div className="recipe-filters mt-10 flex flex-col gap-5">
         <div className="relative max-w-md">
           <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Buscar receta…"
+            type="search"
+            aria-label="Buscar receta"
             className="h-12 w-full rounded-full border border-border bg-card pl-11 pr-5 text-sm outline-none focus:border-primary"
           />
         </div>

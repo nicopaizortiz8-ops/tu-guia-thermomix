@@ -21,6 +21,13 @@ export function SiteNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -41,12 +48,12 @@ export function SiteNav() {
       <div className="container-wide grid h-[4.5rem] grid-cols-[auto_1fr_auto] items-center gap-4 md:h-24">
         <BrandLogo />
 
-        <nav className="hidden items-center justify-center gap-8 xl:flex">
+        <nav className="hidden items-center justify-center gap-5 xl:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="editorial-link text-[0.72rem] uppercase tracking-[0.2em] text-foreground/65 transition-colors hover:text-foreground"
+              className="editorial-link text-[0.68rem] uppercase tracking-[0.12em] text-foreground/65 transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
               activeOptions={{ exact: l.to === "/" }}
             >
@@ -79,6 +86,8 @@ export function SiteNav() {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
             className="inline-flex size-10 items-center justify-center border border-border xl:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -87,7 +96,10 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background xl:hidden">
+        <div
+          id="mobile-navigation"
+          className="mobile-navigation border-t border-border bg-background xl:hidden"
+        >
           <nav className="container-page flex flex-col py-4">
             {links.map((l, i) => (
               <Link
@@ -109,7 +121,7 @@ export function SiteNav() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track("instagram_clicked", { source: "nav_mobile" })}
-              className="mb-4 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.2em] text-muted-foreground"
+              className="mb-4 inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.12em] text-muted-foreground"
             >
               <Instagram className="size-4" /> {site.social.instagramHandle}
             </a>

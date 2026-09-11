@@ -1,295 +1,195 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import videoSrc from "@/assets/VIDEO-2025-09-01-17-12-24.mp4";
 import { WhatsAppLink } from "./whatsapp-link";
 
-type Segment = {
-  start: number;
-  end: number;
-  holdToEnd?: boolean;
-  render: () => ReactNode;
-};
-
-const segments: Segment[] = [
-  {
-    start: 0,
-    end: 0.18,
-    render: () => (
-      <p className="font-display text-[2.6rem] uppercase tracking-[0.06em] text-warm-white md:text-[6rem]">
-       
-      </p>
-    ),
-  },
-  {
-    start: 0.18,
-    end: 0.42,
-    render: () => (
-      <p className="max-w-xl font-display text-[2.2rem] uppercase leading-[1.2] tracking-tight text-warm-white md:text-[4.2rem]">
-       
-        <br />
-       
-        <br />
-        
-        <br />
-       
-      </p>
-    ),
-  },
-  {
-    start: 0.42,
-    end: 0.65,
-    render: () => (
-      <p className="max-w-2xl font-display text-[2rem] italic leading-[1.2] text-warm-white md:text-[3.8rem]">
-        
-        <br />
-        
-      </p>
-    ),
-  },
-  {
-    start: 0.65,
-    end: 0.85,
-    render: () => (
-      <p className="max-w-2xl font-display text-[2.2rem] leading-[1.15] text-warm-white md:text-[4.4rem]">
-        
-        <br />
-        <span className="italic text-champagne"></span>
-      </p>
-    ),
-  },
-  {
-    start: 0.85,
-    end: 1,
-    holdToEnd: true,
-    render: () => (
-      <div className="flex flex-col items-center gap-7">
-        <p className="text-[0.66rem] uppercase tracking-[0.32em] text-champagne">María Regina</p>
-        <WhatsAppLink source="demonstration" variant="light" size="lg" showIcon={false}>
-          Agendar demostración
-        </WhatsAppLink>
-      </div>
-    ),
-  },
-];
-
-function segmentOpacity(progress: number, start: number, end: number, holdToEnd?: boolean) {
-  if (progress < start) return 0;
-  const span = Math.max(end - start, 0.0001);
-  const fadeInEnd = start + span * 0.25;
-  if (progress < fadeInEnd) return (progress - start) / (fadeInEnd - start);
-  if (holdToEnd) return 1;
-  if (progress > end) return 0;
-  const fadeOutStart = end - span * 0.25;
-  if (progress > fadeOutStart) {
-    return Math.max(0, 1 - (progress - fadeOutStart) / (end - fadeOutStart));
-  }
-  return 1;
-}
-
-/** Desktop, motion-safe experience: scroll position drives video.currentTime directly. */
+/** One decoder, with scroll-driven seeking only while the film is visible. */
 function ScrubExperience() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const bgVideoRef = useRef<HTMLVideoElement>(null);
-  const progressRef = useRef(0);
-  const currentTimeRef = useRef(0);
-  const durationRef = useRef(0);
-  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const rafRef = useRef(0);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    const container = containerRef.current;
+    const stage = stageRef.current;
     const video = videoRef.current;
-    if (!video) return;
+    if (!container || !stage || !video) return;
 
-    const onLoadedMetadata = () => {
-      // End the scrub 5s before the clip's true end (a clean cut, not the raw file's last frames).
-      const raw = video.duration || 0;
-      durationRef.current = raw > 5 ? raw - 5 : raw;
-      // Warm up the decoder so the first scrub isn't the first frame ever rendered (Safari/iOS).
-      for (const v of [videoRef.current, bgVideoRef.current]) {
-        const playAttempt = v?.play();
-        if (playAttempt && typeof playAttempt.then === "function") {
-          playAttempt.then(() => v?.pause()).catch(() => {});
-        }
+    let frame = 0;
+    let progress = 0;
+    let displayed = 0;
+    let duration = 0;
+    let visible = false;
+    let disposed = false;
+
+    const schedule = () => {
+      if (!disposed && visible && !frame && !document.hidden) frame = requestAnimationFrame(tick);
+    };
+
+    function tick() {
+      frame = 0;
+      if (!visible || document.hidden) return;
+      displayed += (progress - displayed) * 0.16;
+      if (Math.abs(progress - displayed) < 0.0005) displayed = progress;
+      stage!.style.setProperty("--film-progress", String(displayed));
+      stage!.dataset["complete"] = String(progress > 0.97);
+      if (duration > 0 && !video!.seeking) {
+        const target = displayed * duration;
+        if (Math.abs(video!.currentTime - target) > 0.035) video!.currentTime = target;
       }
+      if (Math.abs(progress - displayed) > 0.0005) schedule();
+    }
+
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const stickyTop = parseFloat(getComputedStyle(stage).top) || 0;
+      const distance = rect.height - stage.offsetHeight;
+      progress = distance > 0 ? Math.min(1, Math.max(0, (stickyTop - rect.top) / distance)) : 0;
+      visible = rect.top < window.innerHeight && rect.bottom > stickyTop;
+      schedule();
+    };
+    const metadata = () => {
+      const raw = video.duration;
+      duration = Number.isFinite(raw) ? Math.max(0, raw > 5 ? raw - 5 : raw) : 0;
+      update();
+    };
+    // A direct touch gesture unlocks the decoder on iOS if preload alone did not.
+    const unlock = () => {
+      const attempt = video.play();
+      attempt
+        ?.then(() => {
+          video.pause();
+          schedule();
+        })
+        .catch(() => {});
     };
 
-    video.addEventListener("loadedmetadata", onLoadedMetadata);
-    if (video.readyState >= 1) onLoadedMetadata();
-    return () => video.removeEventListener("loadedmetadata", onLoadedMetadata);
-  }, []);
+    video.addEventListener("loadedmetadata", metadata);
+    video.addEventListener("loadeddata", schedule);
+    video.addEventListener("seeked", schedule);
+    container.addEventListener("touchstart", unlock, { once: true, passive: true });
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    document.addEventListener("visibilitychange", update);
+    if (video.readyState >= 1) metadata();
+    update();
 
-  useEffect(() => {
-    const computeProgress = () => {
-      const el = containerRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const scrolled = -rect.top;
-      progressRef.current = scrollable > 0 ? Math.min(Math.max(scrolled / scrollable, 0), 1) : 0;
-    };
-
-    computeProgress();
-    window.addEventListener("scroll", computeProgress, { passive: true });
-    window.addEventListener("resize", computeProgress);
     return () => {
-      window.removeEventListener("scroll", computeProgress);
-      window.removeEventListener("resize", computeProgress);
+      disposed = true;
+      cancelAnimationFrame(frame);
+      video.pause();
+      video.removeEventListener("loadedmetadata", metadata);
+      video.removeEventListener("loadeddata", schedule);
+      video.removeEventListener("seeked", schedule);
+      container.removeEventListener("touchstart", unlock);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      document.removeEventListener("visibilitychange", update);
     };
-  }, []);
-
-  useEffect(() => {
-    const tick = () => {
-      const video = videoRef.current;
-      const duration = durationRef.current;
-
-      if (video && duration > 0) {
-        const target = progressRef.current * duration;
-        const current = currentTimeRef.current;
-        const next = current + (target - current) * 0.12;
-        currentTimeRef.current = Math.abs(target - next) < 0.002 ? target : next;
-        if (Math.abs(video.currentTime - currentTimeRef.current) > 0.01) {
-          video.currentTime = currentTimeRef.current;
-        }
-        const bgVideo = bgVideoRef.current;
-        if (bgVideo && Math.abs(bgVideo.currentTime - currentTimeRef.current) > 0.01) {
-          bgVideo.currentTime = currentTimeRef.current;
-        }
-      }
-
-      segments.forEach((seg, i) => {
-        const node = textRefs.current[i];
-        if (!node) return;
-        const o = segmentOpacity(progressRef.current, seg.start, seg.end, seg.holdToEnd);
-        node.style.opacity = String(o);
-        node.style.transform = `translateY(${(1 - o) * 18}px)`;
-        node.style.pointerEvents = o > 0.5 ? "auto" : "none";
-      });
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-ink">
-        {/* Blurred, full-bleed backdrop: the source is a square 480x480 clip, so object-cover
-            alone would crop most of the frame away on a wide viewport. This fills edge to edge
-            without hiding the actual shot. */}
-        <video
-          ref={bgVideoRef}
-          src={videoSrc}
-          muted
-          playsInline
-          preload="auto"
-          controls={false}
-          aria-hidden
-          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
-        />
-        {/* True, undistorted frame — the video everyone actually sees. */}
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          muted
-          playsInline
-          preload="auto"
-          controls={false}
-          className="absolute inset-0 m-auto h-[80%] max-h-[36rem] w-auto max-w-[85%] object-contain md:h-[62vh] md:w-[62vh] md:max-h-[38rem] md:max-w-[38rem]"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/5 to-black/55" />
-        <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-          {segments.map((seg, i) => (
-            <div
-              key={i}
-              ref={(node) => {
-                textRefs.current[i] = node;
-              }}
-              className="absolute inset-0 flex flex-col items-center justify-center opacity-0"
-            >
-              {seg.render()}
-            </div>
-          ))}
+    <section
+      ref={containerRef}
+      className={`film-scroll ${failed ? "film-scroll-error" : ""}`}
+      aria-label="Video de Thermomix controlado al desplazarte"
+    >
+      <div ref={stageRef} className="film-stage">
+        <div className="film-topline">
+          <span>Thermomix TM7</span>
+          <span>Hay que verla para entenderla.</span>
+        </div>
+        <div className="film-display">
+          <div className="film-side-note" aria-hidden="true">
+            <span>01 — THERMOMIX</span>
+            <span className="film-side-rule" />
+          </div>
+          <div className="film-window">
+            <video
+              ref={videoRef}
+              src={videoSrc}
+              muted
+              playsInline
+              preload="auto"
+              aria-label="Demostración de Thermomix; desplázate para avanzar o retroceder"
+              onError={() => setFailed(true)}
+            />
+            {failed && (
+              <div className="film-error">
+                <p>No se pudo cargar el video.</p>
+                <a href={videoSrc} className="lux-text-link">
+                  Abrir video <ArrowUpRight size={14} />
+                </a>
+              </div>
+            )}
+          </div>
+          <p className="film-side-signature signature" aria-hidden="true">
+            María Regina
+          </p>
+        </div>
+        <div className="film-footer">
+          <div className="film-scroll-cue">
+            <span className="film-scroll-icon">
+              <ArrowDown size={16} aria-hidden="true" />
+            </span>
+            <span>Desliza para descubrir</span>
+          </div>
+          <WhatsAppLink
+            source="demonstration"
+            variant="outline"
+            size="sm"
+            showIcon={false}
+            className="film-cta"
+          >
+            Agendar demostración <ArrowUpRight size={14} aria-hidden="true" />
+          </WhatsAppLink>
+        </div>
+        <div className="film-timeline" aria-hidden="true">
+          <span />
         </div>
       </div>
     </section>
   );
 }
 
-/** Loops a video but cuts 5s before its true end instead of playing to the last frame. */
-function useTrimmedLoop() {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    const onTimeUpdate = () => {
-      const trimmedEnd = video.duration - 5;
-      if (video.duration > 5
-         && video.currentTime >= trimmedEnd) {
-        video.currentTime = 0;
-      }
-    };
-    video.addEventListener("timeupdate", onTimeUpdate);
-    return () => video.removeEventListener("timeupdate", onTimeUpdate);
-  }, []);
-  return ref;
-}
-
-/** Mobile / reduced-motion fallback: plain inline muted looping video, no scroll-jacking. */
+/** The same framing with native playback controls when reduced motion is preferred. */
 function FallbackVideo() {
-  const bgRef = useTrimmedLoop();
-  const fgRef = useTrimmedLoop();
   return (
-    <section className="relative w-full overflow-hidden bg-ink">
-      <div className="relative aspect-[3/4] w-full sm:aspect-video">
-        <video
-          ref={bgRef}
-          src={videoSrc}
-          muted
-          playsInline
-          autoPlay
-          loop
-          preload="metadata"
-          aria-hidden
-          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-3xl"
-        />
-        <video
-          ref={fgRef}
-          src={videoSrc}
-          muted
-          playsInline
-          autoPlay
-          loop
-          preload="metadata"
-          className="absolute inset-0 m-auto h-auto max-h-full w-[68%] max-w-[19rem] object-contain sm:h-[65%] sm:w-auto"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/25" />
-        <div className="absolute inset-0 flex flex-col items-center justify-end gap-5 px-6 pb-10 text-center">
-          <p className="font-display text-[1.9rem] leading-[1.1] text-warm-white">
-            Hay que verla
-            <br />
-            <span className="italic text-champagne">para entenderla.</span>
-          </p>
-          <WhatsAppLink source="demonstration" variant="light" showIcon={false}>
-            Agendar demostración
-          </WhatsAppLink>
+    <section className="film-static">
+      <div className="film-topline">
+        <span>Thermomix TM7</span>
+        <span>Hay que verla para entenderla.</span>
+      </div>
+      <div className="film-display">
+        <div className="film-window">
+          <video
+            src={videoSrc}
+            muted
+            playsInline
+            controls
+            preload="metadata"
+            aria-label="Demostración de Thermomix"
+          />
         </div>
+      </div>
+      <div className="film-static-footer">
+        <WhatsAppLink source="demonstration" variant="outline" size="sm" showIcon={false}>
+          Agendar demostración <ArrowUpRight size={14} aria-hidden="true" />
+        </WhatsAppLink>
       </div>
     </section>
   );
 }
 
 export function ScrollVideo() {
-  const [mounted, setMounted] = useState(false);
   const [useScrub, setUseScrub] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    setUseScrub(isDesktop && !reduceMotion);
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setUseScrub(!motion.matches);
+    update();
+    motion.addEventListener("change", update);
+    return () => motion.removeEventListener("change", update);
   }, []);
-
-  return <div id="scroll-video">{mounted && useScrub ? <ScrubExperience /> : <FallbackVideo />}</div>;
+  return <div id="scroll-video">{useScrub ? <ScrubExperience /> : <FallbackVideo />}</div>;
 }

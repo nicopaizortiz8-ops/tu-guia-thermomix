@@ -5,6 +5,7 @@ import pepian from "@/assets/receta-pepian.jpg";
 import yogurt from "@/assets/receta-yogurt.jpg";
 import sopa from "@/assets/receta-sopa.jpg";
 import postre from "@/assets/receta-postre.jpg";
+import { newRecipes } from "./new-recipes";
 
 export type Step = {
   text: string;
@@ -69,7 +70,10 @@ export const recipes: Recipe[] = [
         text: "Añade el arroz y el caldo caliente. Deja cocinar sin abrir el vaso.",
         settings: "16 min · 100 °C · Velocidad 1 · Giro inverso",
       },
-      { text: "Agrega el parmesano rallado y mezcla.", settings: "20 seg · Velocidad 1 · Giro inverso" },
+      {
+        text: "Agrega el parmesano rallado y mezcla.",
+        settings: "20 seg · Velocidad 1 · Giro inverso",
+      },
       { text: "Deja reposar 3 minutos, termina con tomillo y sirve." },
     ],
     tips: [
@@ -82,7 +86,8 @@ export const recipes: Recipe[] = [
     slug: "pollo-cremoso-al-limon",
     title: "Pollo cremoso al limón",
     image: polloLimon,
-    description: "Una salsa ligera de limón y hierbas sobre pollo jugoso. Perfecto para un día entre semana.",
+    description:
+      "Una salsa ligera de limón y hierbas sobre pollo jugoso. Perfecto para un día entre semana.",
     minutes: 25,
     servings: 4,
     difficulty: "Fácil",
@@ -97,9 +102,18 @@ export const recipes: Recipe[] = [
       { amount: 1, unit: "ramita", name: "romero" },
     ],
     steps: [
-      { text: "Añade el aceite y el romero al vaso y calienta.", settings: "2 min · 120 °C · Velocidad 1" },
-      { text: "Coloca el pollo en el Varoma y cocina al vapor.", settings: "18 min · Varoma · Velocidad 1" },
-      { text: "Añade crema, jugo y ralladura de limón. Mezcla.", settings: "2 min · 90 °C · Velocidad 2" },
+      {
+        text: "Añade el aceite y el romero al vaso y calienta.",
+        settings: "2 min · 120 °C · Velocidad 1",
+      },
+      {
+        text: "Coloca el pollo en el Varoma y cocina al vapor.",
+        settings: "18 min · Varoma · Velocidad 1",
+      },
+      {
+        text: "Añade crema, jugo y ralladura de limón. Mezcla.",
+        settings: "2 min · 90 °C · Velocidad 2",
+      },
       { text: "Baña el pollo con la salsa y sirve." },
     ],
     tips: ["Corta las pechugas en filetes parejos para una cocción uniforme."],
@@ -109,7 +123,8 @@ export const recipes: Recipe[] = [
     slug: "pan-casero",
     title: "Pan casero de todos los días",
     image: pan,
-    description: "Miga suave, corteza dorada y una masa que se amasa sola. El pan que reemplaza al del súper.",
+    description:
+      "Miga suave, corteza dorada y una masa que se amasa sola. El pan que reemplaza al del súper.",
     minutes: 120,
     servings: 8,
     difficulty: "Fácil",
@@ -136,7 +151,8 @@ export const recipes: Recipe[] = [
     slug: "pepian-guatemalteco",
     title: "Pepián guatemalteco",
     image: pepian,
-    description: "El clásico de casa, con su recado tostado y molido en el vaso hasta quedar perfectamente terso.",
+    description:
+      "El clásico de casa, con su recado tostado y molido en el vaso hasta quedar perfectamente terso.",
     minutes: 60,
     servings: 6,
     difficulty: "Media",
@@ -154,9 +170,15 @@ export const recipes: Recipe[] = [
     steps: [
       { text: "Tuesta pepitoria y ajonjolí en el vaso.", settings: "6 min · 120 °C · Velocidad 1" },
       { text: "Pulveriza las semillas tostadas.", settings: "30 seg · Velocidad 10" },
-      { text: "Añade tomate, miltomate y chile. Cocina.", settings: "10 min · 100 °C · Velocidad 1" },
+      {
+        text: "Añade tomate, miltomate y chile. Cocina.",
+        settings: "10 min · 100 °C · Velocidad 1",
+      },
       { text: "Tritura el recado hasta que quede terso.", settings: "1 min · Velocidad 8" },
-      { text: "Agrega pollo y caldo y cocina.", settings: "30 min · 100 °C · Velocidad 1 · Giro inverso" },
+      {
+        text: "Agrega pollo y caldo y cocina.",
+        settings: "30 min · 100 °C · Velocidad 1 · Giro inverso",
+      },
       { text: "Sirve con arroz y tortillas." },
     ],
     tips: ["Cuela el recado si lo prefieres aún más fino."],
@@ -166,7 +188,8 @@ export const recipes: Recipe[] = [
     slug: "yogurt-natural-casero",
     title: "Yogurt natural casero",
     image: yogurt,
-    description: "Cremoso, sin azúcares añadidos y a una fracción del costo del yogurt del supermercado.",
+    description:
+      "Cremoso, sin azúcares añadidos y a una fracción del costo del yogurt del supermercado.",
     minutes: 30,
     servings: 6,
     difficulty: "Fácil",
@@ -189,7 +212,8 @@ export const recipes: Recipe[] = [
     slug: "sopa-verde-de-temporada",
     title: "Sopa verde de temporada",
     image: sopa,
-    description: "Verduras de temporada convertidas en una crema aterciopelada en menos de 25 minutos.",
+    description:
+      "Verduras de temporada convertidas en una crema aterciopelada en menos de 25 minutos.",
     minutes: 25,
     servings: 4,
     difficulty: "Fácil",
@@ -215,7 +239,8 @@ export const recipes: Recipe[] = [
     slug: "mousse-de-chocolate",
     title: "Mousse de chocolate en 15 minutos",
     image: postre,
-    description: "Aireada, intensa y con solo cuatro ingredientes. El postre que siempre salva la cena.",
+    description:
+      "Aireada, intensa y con solo cuatro ingredientes. El postre que siempre salva la cena.",
     minutes: 15,
     servings: 4,
     difficulty: "Fácil",
@@ -236,6 +261,166 @@ export const recipes: Recipe[] = [
     tips: ["Usa huevos muy frescos o pasteurizados."],
     swaps: ["Chocolate semiamargo → chocolate con leche (reduce el azúcar)"],
   },
+  {
+    slug: "hummus-de-garbanzos",
+    title: "Hummus de garbanzos",
+    image: "/illustrations/hummus.svg",
+    description:
+      "Un dip cremoso de garbanzos, limón y tahini para acompañar verduras o pan recién hecho.",
+    minutes: 10,
+    servings: 6,
+    difficulty: "Fácil",
+    costPerServing: 4,
+    categories: ["saludables", "rapidas", "familia"],
+    ingredients: [
+      { amount: 300, unit: "g", name: "garbanzos cocidos y escurridos" },
+      { amount: 30, unit: "g", name: "tahini" },
+      { amount: 25, unit: "g", name: "jugo de limón" },
+      { amount: 20, unit: "g", name: "aceite de oliva" },
+      { amount: 60, unit: "g", name: "agua fría" },
+      { amount: 1, unit: "diente", name: "ajo" },
+    ],
+    steps: [
+      { text: "Tritura todos los ingredientes hasta obtener una crema suave." },
+      { text: "Ajusta el agua poco a poco y sirve con aceite de oliva." },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  {
+    slug: "salsa-de-tomate-casera",
+    title: "Salsa de tomate casera",
+    image: "/illustrations/salsa.svg",
+    description:
+      "Tomate, ajo y albahaca en una salsa sencilla para pasta, pizza y las comidas de la semana.",
+    minutes: 30,
+    servings: 6,
+    difficulty: "Fácil",
+    costPerServing: 3,
+    categories: ["familia", "comunidad"],
+    ingredients: [
+      { amount: 800, unit: "g", name: "tomates maduros" },
+      { amount: 80, unit: "g", name: "cebolla" },
+      { amount: 20, unit: "g", name: "aceite de oliva" },
+      { amount: 1, unit: "diente", name: "ajo" },
+      { amount: 5, unit: "hojas", name: "albahaca" },
+    ],
+    steps: [
+      { text: "Trocea la cebolla y el ajo. Sofríe con el aceite." },
+      { text: "Añade el tomate troceado y cocina hasta que la salsa espese." },
+      { text: "Agrega la albahaca y ajusta la sazón." },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  {
+    slug: "bebida-de-avena",
+    title: "Bebida de avena",
+    image: "/illustrations/avena.svg",
+    description:
+      "Una bebida suave con avena y agua, lista para acompañar el café o preparar un desayuno.",
+    minutes: 10,
+    servings: 4,
+    difficulty: "Fácil",
+    costPerServing: 2,
+    categories: ["saludables", "rapidas", "comunidad"],
+    ingredients: [
+      { amount: 95, unit: "g", name: "avena en hojuelas" },
+      { amount: 1000, unit: "ml", name: "agua fría" },
+    ],
+    steps: [
+      { text: "Tritura la avena con agua bien fría durante unos segundos." },
+      { text: "Filtra sin apretar demasiado y refrigera. Agita antes de servir." },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  {
+    slug: "mantequilla-de-mani",
+    title: "Mantequilla de maní",
+    image: "/illustrations/mani.svg",
+    description:
+      "Maní tostado convertido en una crema para tostadas, fruta y meriendas hechas en casa.",
+    minutes: 15,
+    servings: 12,
+    difficulty: "Fácil",
+    costPerServing: 6,
+    categories: ["rapidas", "familia"],
+    ingredients: [{ amount: 500, unit: "g", name: "maní tostado sin sal" }],
+    steps: [
+      { text: "Tritura el maní en tandas cortas, bajando los restos de las paredes entre tandas." },
+      { text: "Continúa hasta que libere sus aceites y alcance una textura untable." },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  {
+    slug: "pesto-de-albahaca",
+    title: "Pesto de albahaca y maní",
+    image: "/illustrations/pesto.svg",
+    description:
+      "Albahaca fresca, queso y maní en una salsa aromática que transforma una pasta sencilla.",
+    minutes: 10,
+    servings: 4,
+    difficulty: "Fácil",
+    costPerServing: 7,
+    categories: ["rapidas", "familia", "comunidad"],
+    ingredients: [
+      { amount: 30, unit: "g", name: "albahaca fresca" },
+      { amount: 40, unit: "g", name: "maní tostado" },
+      { amount: 40, unit: "g", name: "queso parmesano" },
+      { amount: 70, unit: "g", name: "aceite de oliva" },
+      { amount: 1, unit: "diente", name: "ajo" },
+    ],
+    steps: [
+      { text: "Tritura el queso y el maní." },
+      { text: "Añade la albahaca, el ajo y el aceite; mezcla hasta conseguir la textura deseada." },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  {
+    slug: "panqueques-de-avena",
+    title: "Panqueques de avena y banano",
+    image: "/illustrations/panqueques.svg",
+    description: "Suaves y doraditos, con una mezcla de avena y banano que se prepara en el vaso.",
+    minutes: 20,
+    servings: 4,
+    difficulty: "Fácil",
+    costPerServing: 5,
+    categories: ["rapidas", "familia", "postres"],
+    ingredients: [
+      { amount: 150, unit: "g", name: "avena" },
+      { amount: 1, unit: "unidad", name: "banano maduro" },
+      { amount: 2, unit: "unidades", name: "huevos" },
+      { amount: 150, unit: "ml", name: "leche" },
+      { amount: 1, unit: "cdta", name: "polvo para hornear" },
+      { amount: 10, unit: "g", name: "aceite" },
+    ],
+    steps: [
+      {
+        text: "Muele la avena e incorpora banano, huevos, leche y polvo para hornear. Mezcla y deja reposar 5 minutos.",
+      },
+      {
+        text: "Engrasa una sartén y cocina porciones pequeñas a fuego medio, por ambos lados, hasta que el centro esté cocido.",
+      },
+    ],
+    tips: [
+      "Las cantidades y los costos son orientativos; consulta el paso a paso con María Regina.",
+    ],
+    swaps: [],
+  },
+  ...newRecipes,
 ];
 
 export function getRecipe(slug: string) {

@@ -105,6 +105,7 @@ export function Chip({
   return (
     <Comp
       onClick={onClick}
+      aria-pressed={onClick ? Boolean(active) : undefined}
       className={cn(
         "inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-[0.8rem] tracking-wide transition-all duration-300",
         active
@@ -210,7 +211,7 @@ export function RecipeCard({
     <Link
       to="/recetas/$slug"
       params={{ slug: recipe.slug }}
-      className={cn("group block", className)}
+      className={cn("recipe-card group block", className)}
     >
       <div className="hover-zoom relative bg-secondary">
         <img
@@ -262,9 +263,7 @@ export function IdeasMeter({ used = 3, total = 5 }: { used?: number; total?: num
           />
         ))}
       </span>
-      <span>
-        Te quedan {left} ideas este mes
-      </span>
+      <span>Te quedan {left} ideas este mes</span>
     </div>
   );
 }

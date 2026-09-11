@@ -1,15 +1,9 @@
+import { foodCosts, moneyInput, monthlyFoodTotals } from "@/data/food-costs";
+import { MachineDrawing } from "@/components/site/machine-drawing";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { formatQ, track } from "@/lib/site";
 import { Chip, Disclaimer } from "@/components/site/ui-bits";
 import { WhatsAppLink } from "@/components/site/whatsapp-link";
@@ -40,37 +34,25 @@ const frecuencias = [
   { label: "3–4", value: 3.5 },
   { label: "5+", value: 5.5 },
 ];
-const productos = [
-  "Pan",
-  "Yogurt",
-  "Pizza",
-  "Mayonesa",
-  "Mermelada",
-  "Salsas",
-  "Hummus",
-  "Leche vegetal",
-  "Postres",
-  "Helado",
-  "Masas",
-  "Caldos",
-  "Otro",
-];
+const productos = foodCosts.map((food) => food.name);
 
 function Ahorro() {
   const [personasSel, setPersonas] = useState("4");
   const [frecuencia, setFrecuencia] = useState(3.5);
   const [gasto, setGasto] = useState(180);
-  const [sel, setSel] = useState<string[]>(["Pan", "Yogurt", "Salsas"]);
+  const [sel, setSel] = useState<string[]>(["Pan", "Yogurt", "Salsa de tomate"]);
   const [done, setDone] = useState(false);
+  const [homeRatio, setHomeRatio] = useState(45);
 
   const calc = useMemo(() => {
     const fuera = frecuencia * gasto * 4.3;
-    const preparados = sel.length * 95 * (personasSel === "5+" ? 1.6 : Number(personasSel) / 3 + 0.6);
+    const basket = monthlyFoodTotals(sel, personasSel === "5+" ? 5 : Number(personasSel));
+    const preparados = basket.bought;
     const actual = fuera + preparados;
-    const encasa = fuera * 0.45 + preparados * 0.4;
-    const ahorro = Math.max(actual - encasa, 0);
+    const encasa = fuera * (homeRatio / 100) + basket.homemade;
+    const ahorro = actual - encasa;
     return { fuera, preparados, actual, encasa, ahorro };
-  }, [frecuencia, gasto, sel, personasSel]);
+  }, [frecuencia, gasto, sel, personasSel, homeRatio]);
 
   const chartData = [
     { periodo: "1 mes", ahorro: Math.round(calc.ahorro) },
@@ -107,7 +89,11 @@ function Ahorro() {
 
           <Block title="¿Cuántas veces comen fuera o piden comida por semana?">
             {frecuencias.map((f) => (
-              <Chip key={f.label} active={frecuencia === f.value} onClick={() => setFrecuencia(f.value)}>
+              <Chip
+                key={f.label}
+                active={frecuencia === f.value}
+                onClick={() => setFrecuencia(f.value)}
+              >
                 {f.label}
               </Chip>
             ))}
@@ -121,7 +107,10 @@ function Ahorro() {
                 type="number"
                 min={0}
                 value={gasto}
-                onChange={(e) => setGasto(Number(e.target.value))}
+                onChange={(e) => setGasto(moneyInput(e.target.value))}
+                max={100000}
+                inputMode="decimal"
+                aria-label="Gasto por ocasión"
                 className="h-12 w-40 rounded-full border border-border bg-background px-5 text-sm outline-none focus:border-primary"
               />
               <span className="text-sm text-muted-foreground">por ocasión</span>
@@ -133,17 +122,71 @@ function Ahorro() {
               <Chip
                 key={p}
                 active={sel.includes(p)}
-                onClick={() => setSel((s) => (s.includes(p) ? s.filter((x) => x !== p) : [...s, p]))}
+                onClick={() =>
+                  setSel((s) => (s.includes(p) ? s.filter((x) => x !== p) : [...s, p]))
+                }
               >
                 {p}
               </Chip>
             ))}
           </Block>
 
+          <details className="rounded-2xl bg-secondary/60 p-5 text-xs leading-relaxed text-muted-foreground">
+            <summary className="cursor-pointer font-medium text-foreground">
+              Ajustar los supuestos
+            </summary>
+            <p className="mt-3">
+              4.3 semanas por mes. El gasto por ocasión corresponde a toda la casa. Estimamos
+              sustituir esas comidas por comida casera; ajusta su costo como porcentaje del gasto
+              fuera.
+            </p>
+            <label className="mt-4 block">
+              Costo en casa: {homeRatio}% del gasto fuera
+              <input
+                type="range"
+                min={20}
+                max={100}
+                step={5}
+                value={homeRatio}
+                onChange={(e) => setHomeRatio(Number(e.target.value))}
+                className="money-range mt-3 w-full"
+              />
+            </label>
+            <p className="mt-3">
+              Productos: precio por unidad × consumo mensual de referencia × personas / 4 (5+ se
+              calcula como 5). No dupliques productos incluidos en tus comidas fuera. No se incluyen
+              equipo, cuotas ni tiempo de trabajo.
+            </p>
+            <ul className="mt-3 space-y-1">
+              {foodCosts
+                .filter((food) => sel.includes(food.name))
+                .map((food) => (
+                  <li key={food.name}>
+                    {food.name}: {food.monthly} × {food.unit} al mes para 4 personas.
+                  </li>
+                ))}
+            </ul>
+            <Link to="/ai-kitchen/hazlo-en-casa" className="mt-3 inline-block underline">
+              Ver precios, cantidades y referencias
+            </Link>
+          </details>
+
           <button
             onClick={() => {
               setDone(true);
-              track("savings_calculated", { personas: personasSel, frecuencia, gasto, productos: sel.length });
+              document.getElementById("savings-result")?.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                  ? "auto"
+                  : "smooth",
+                block: "start",
+              });
+              document.getElementById("savings-result")?.focus({ preventScroll: true });
+              track("savings_calculated", {
+                personas: personasSel,
+                frecuencia,
+                gasto,
+                productos: sel.length,
+              });
             }}
             className="h-13 w-full rounded-full bg-primary text-base font-medium text-primary-foreground"
           >
@@ -151,16 +194,19 @@ function Ahorro() {
           </button>
         </div>
 
-        <div className="space-y-5">
+        <div id="savings-result" tabIndex={-1} className="space-y-5 scroll-mt-28 outline-none">
           <div className="rounded-[1.5rem] border border-border bg-card p-6 md:p-8">
-            <p className="eyebrow">Tu estimación</p>
+            <div className="flex items-center justify-between">
+              <p className="eyebrow">Tu estimación</p>
+              <MachineDrawing className="h-16 w-14 text-olive/60" />
+            </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <Stat label="Gasto actual" value={`${formatQ(calc.actual)} / mes`} big />
               <Stat label="Cocinando más en casa" value={`${formatQ(calc.encasa)} / mes`} big />
               <Stat label="Restaurantes / delivery" value={formatQ(calc.fuera)} />
               <Stat label="Productos preparados del súper" value={formatQ(calc.preparados)} />
             </div>
-            <div className="mt-6 rounded-2xl bg-primary p-6 text-primary-foreground">
+            <div className="savings-highlight mt-6 rounded-2xl bg-primary p-6 text-primary-foreground">
               <p className="text-xs uppercase tracking-[0.18em] text-primary-foreground/70">
                 Ahorro potencial estimado
               </p>
@@ -176,7 +222,11 @@ function Ahorro() {
             <div className="mt-5 h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke="var(--color-border)"
+                    vertical={false}
+                  />
                   <XAxis dataKey="periodo" tickLine={false} axisLine={false} fontSize={12} />
                   <YAxis tickLine={false} axisLine={false} fontSize={12} width={60} />
                   <Tooltip
