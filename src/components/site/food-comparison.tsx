@@ -84,6 +84,9 @@ export function FoodComparison({ interactive = false }: { interactive?: boolean 
               <div className="cost-track mt-4" aria-hidden="true">
                 <span style={{ width: `${Math.min((food.homemade / food.bought) * 100, 100)}%` }} />
               </div>
+              {food.comparisonNote && (
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{food.comparisonNote}</p>
+              )}
               {interactive && (
                 <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
                   <span className="text-xs text-muted-foreground">Unidades / mes</span>

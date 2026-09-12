@@ -88,6 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Recetas, Lives e ideas de María Regina para cocinar mejor en casa, desde Guatemala.",
       },
       { name: "author", content: "María Regina — Yo Uso Thermomix" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:locale", content: "es_GT" },
       { property: "og:title", content: "Yo Uso Thermomix" },
       {
         property: "og:description",

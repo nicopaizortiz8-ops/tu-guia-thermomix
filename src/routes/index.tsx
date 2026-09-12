@@ -8,13 +8,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Descubre Thermomix en Guatemala con María Regina Ortiz. Conoce Thermomix TM7, sus beneficios y agenda una demostración personalizada.",
+          "Thermomix Guatemala con María Regina Ortiz, consultora independiente. Conoce la TM7, descubre recetas y agenda una demostración personalizada.",
       },
       { property: "og:title", content: "Yo Uso Thermomix | Thermomix Guatemala" },
       {
         property: "og:description",
         content:
-          "Descubre Thermomix TM7 y agenda una demostración con María Regina Ortiz en Guatemala..",
+          "Thermomix Guatemala: conoce la TM7, descubre recetas y agenda una demostración con María Regina Ortiz, consultora independiente.",
+      },
+      { name: "twitter:title", content: "Yo Uso Thermomix | Thermomix Guatemala" },
+      {
+        name: "twitter:description",
+        content: "Conoce Thermomix TM7 en Guatemala con María Regina Ortiz. Recetas y demostraciones personalizadas.",
       },
     ],
   }),

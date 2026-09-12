@@ -2,6 +2,7 @@
 export type FoodCost = {
   name: string;
   detail?: string;
+  comparisonNote?: string;
   unit: string;
   bought: number;
   homemade: number;
@@ -153,21 +154,28 @@ export const foodCosts: FoodCost[] = [
   {
     name: "Postres",
     detail: "mousse de chocolate",
-    unit: "4 porciones",
-    bought: 60,
-    homemade: 36,
+    unit: "6 onzas de peso (≈170 g)",
+    bought: 10.4,
+    homemade: 8.87,
     monthly: 2,
-    basis: "Chocolate Q18 + crema Q12 + azúcar Q2 + leche Q3 + energía Q1. Compra estimada.",
+    comparisonNote: "Comparado con pudín de chocolate Essential Everyday de La Torre; no es mousse. Precio proporcional a 6 oz.",
+    basis: "Compra: pudín Essential Everyday, Q22.50 / 368 g; Q22.50 × 170.1 / 368 = Q10.40 por 6 oz de peso, no onzas líquidas. El envase completo cuesta Q22.50. Mousse casero: 200 g chocolate Q18 + 300 g crema Q12 + 3 huevos (150 g sin cáscara) Q4 + 40 g azúcar Q1 + energía Q1; Q36 / 690 g × 170.1 g = Q8.87. Rendimiento y costos de ingredientes estimados. Son postres distintos en textura y composición. La ficha consultada indica sin disponibilidad; precio publicado de referencia.",
+    source: "https://www.latorre.com.gt/pudin-chocolate-essential-everyday-2057333/p",
+    reference: "La Torre · Pudín Essential Everyday 368 g · Q22.50 (sin disponibilidad al consultar)",
     slug: "mousse-de-chocolate",
   },
   {
     name: "Caldos",
-    unit: "1 L líquido",
-    bought: 28,
+    detail: "de verduras",
+    unit: "907 g de caldo líquido",
+    bought: 42.9,
     homemade: 14,
     monthly: 2,
     basis:
-      "Verduras Q9 + hierbas Q2 + agua y energía Q3. Comparación con caldo líquido, no cubitos. Compra estimada.",
+      "Compra: caldo de verduras sin sal Kitchen Basics en La Torre, Q42.90 por 907 g según la ficha del supermercado. Casero: verduras Q9 + hierbas Q2 + agua y energía Q3, ajustando el caldo colado a un peso final de 907 g. Costo casero estimado para la misma cantidad; no es una comparación con cubitos ni polvo. La ficha consultada indica sin disponibilidad; precio publicado de referencia.",
+    comparisonNote: "Comparado con caldo líquido de verduras Kitchen Basics de La Torre, por el mismo peso.",
+    source: "https://www.latorre.com.gt/caldo-verduras-sin-sal-kitchen-basics-tetra-99345/p",
+    reference: "La Torre · Kitchen Basics sin sal 907 g · Q42.90 (sin disponibilidad al consultar)",
   },
   {
     name: "Mantequilla",
