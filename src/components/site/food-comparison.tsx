@@ -59,7 +59,9 @@ export function FoodComparison({ interactive = false }: { interactive?: boolean 
             <article key={food.name} className="food-card" data-selected={interactive && count > 0}>
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h4 className="font-display text-xl">{food.name}</h4>
+                  <h4 className="font-display text-xl">
+                    {food.name}{food.detail && ` (${food.detail})`}
+                  </h4>
                   <p className="mt-1 text-xs text-muted-foreground">{food.unit}</p>
                 </div>
                 <span className={`difference-badge ${difference < 0 ? "difference-negative" : ""}`}>

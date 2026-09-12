@@ -1,4 +1,4 @@
-/** Compact TM7 silhouette for the navigation wordmark. */
+/** TM7 silhouette shared by the navigation wordmark and site illustrations. */
 export function Tm7Icon({ className }: { className?: string }) {
   return (
     <svg

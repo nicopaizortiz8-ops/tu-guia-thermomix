@@ -19,6 +19,8 @@ export const site = {
     youtube: "https://youtube.com/", // PLACEHOLDER
   },
   currency: "Q",
+  liveSchedule: "Martes cada 15 días · 6:00 p. m.",
+  liveRecipe: "La receta varía según la semana. Consulta la próxima fecha y receta en Instagram.",
 } as const;
 
 export type WhatsAppSource =

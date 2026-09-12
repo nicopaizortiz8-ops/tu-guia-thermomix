@@ -352,12 +352,12 @@ function HomeLive() {
         </a>
         <div className="lux-live-copy">
           <p className="lux-kicker">Próximo live</p>
-          <h3>Consulta en mi pagina de instagram</h3>
+          <h3>Una receta diferente en cada encuentro</h3>
           <div className="lux-live-time">
-            <span>Martes</span>
-            <span>6:00 PM</span>
-            <span>con María Regina</span>
+            <span>{site.liveSchedule}</span>
+            <span>Hora de Guatemala · con María Regina</span>
           </div>
+          <p>{site.liveRecipe}</p>
           <div className="lux-actions">
             <WhatsAppLink source="lives" showIcon={false}>
               Quiero recibir el enlace

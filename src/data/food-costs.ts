@@ -1,6 +1,7 @@
 /** GTQ per comparable batch. Retail references checked 2026-09-11; homemade costs are estimates. */
 export type FoodCost = {
   name: string;
+  detail?: string;
   unit: string;
   bought: number;
   homemade: number;
@@ -13,12 +14,15 @@ export type FoodCost = {
 export const foodCosts: FoodCost[] = [
   {
     name: "Pan",
-    unit: "580 g",
-    bought: 24,
+    detail: "baguette",
+    unit: "560 g · 2 baguettes de 280 g",
+    bought: 36,
     homemade: 12,
     monthly: 4,
     basis:
-      "380 g harina Q5.70 + levadura Q1.50 + aceite y sal Q1.80 + energía Q3.00. Precio comprado estimado.",
+      "Compra: 2 baguettes Tradición Masa Madre de Paiz, de 280 g a Q18 cada una. Casero: 380 g harina Q5.70 + levadura Q1.50 + aceite y sal Q1.80 + energía Q3.00; rendimiento estimado 560 g. El pan casero usa levadura, no masa madre.",
+    source: "https://www.paiz.com.gt/panaderia-y-tortilleria?page=5",
+    reference: "Paiz · Baguette Tradición Masa Madre 280 g · Q18",
     slug: "pan-casero",
   },
   {
@@ -148,6 +152,7 @@ export const foodCosts: FoodCost[] = [
   },
   {
     name: "Postres",
+    detail: "mousse de chocolate",
     unit: "4 porciones",
     bought: 60,
     homemade: 36,

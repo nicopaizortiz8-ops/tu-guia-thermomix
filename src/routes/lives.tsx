@@ -14,7 +14,7 @@ export const Route = createFileRoute("/lives")({
       {
         name: "description",
         content:
-          "Cocinamos en vivo cada semana: recetas paso a paso, dudas resueltas y los Lives anteriores para ver cuando quieras.",
+          "Cocinamos en vivo los martes cada 15 días a las 6:00 p. m., hora de Guatemala. La receta varía según la semana.",
       },
       { property: "og:title", content: "Cocina conmigo — Lives | Yo Uso Thermomix" },
       { property: "og:description", content: "Lives de cocina en vivo y grabados." },
@@ -30,7 +30,7 @@ function Lives() {
         <SectionHeading
           eyebrow="Cocina conmigo"
           title="Nos vemos en la cocina."
-          description="Cada semana cocinamos en vivo una receta completa y respondo dudas mientras avanzamos."
+          description={`${site.liveSchedule}, hora de Guatemala. Cocinamos una receta diferente en cada encuentro y respondo dudas mientras avanzamos.`}
         />
         <MachineDrawing className="lives-heading-drawing" />
       </div>
@@ -43,10 +43,10 @@ function Lives() {
           </span>
         </div>
         <div className="live-feature-copy">
-          <p className="eyebrow">[Fecha por confirmar]</p>
-          <h2 className="mt-3 text-3xl">Jueves · 7:00 p.m.</h2>
+          <p className="eyebrow">Cocina en vivo · hora de Guatemala</p>
+          <h2 className="mt-3 text-3xl">{site.liveSchedule}</h2>
           <p className="mt-3 text-muted-foreground">
-            Preparamos: <span className="text-foreground">Pan casero de todos los días</span>
+            {site.liveRecipe}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a

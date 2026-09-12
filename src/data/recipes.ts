@@ -264,7 +264,7 @@ export const recipes: Recipe[] = [
   {
     slug: "hummus-de-garbanzos",
     title: "Hummus de garbanzos",
-    image: "/illustrations/hummus.svg",
+    image: "/images/recipes/hummus.jpg",
     description:
       "Un dip cremoso de garbanzos, limón y tahini para acompañar verduras o pan recién hecho.",
     minutes: 10,
@@ -292,7 +292,7 @@ export const recipes: Recipe[] = [
   {
     slug: "salsa-de-tomate-casera",
     title: "Salsa de tomate casera",
-    image: "/illustrations/salsa.svg",
+    image: "/images/recipes/salsa-tomate.jpg",
     description:
       "Tomate, ajo y albahaca en una salsa sencilla para pasta, pizza y las comidas de la semana.",
     minutes: 30,
@@ -320,7 +320,7 @@ export const recipes: Recipe[] = [
   {
     slug: "bebida-de-avena",
     title: "Bebida de avena",
-    image: "/illustrations/avena.svg",
+    image: "/images/recipes/bebida-avena.jpg",
     description:
       "Una bebida suave con avena y agua, lista para acompañar el café o preparar un desayuno.",
     minutes: 10,
@@ -344,7 +344,7 @@ export const recipes: Recipe[] = [
   {
     slug: "mantequilla-de-mani",
     title: "Mantequilla de maní",
-    image: "/illustrations/mani.svg",
+    image: "/images/recipes/mantequilla-mani.jpg",
     description:
       "Maní tostado convertido en una crema para tostadas, fruta y meriendas hechas en casa.",
     minutes: 15,
@@ -365,7 +365,7 @@ export const recipes: Recipe[] = [
   {
     slug: "pesto-de-albahaca",
     title: "Pesto de albahaca y maní",
-    image: "/illustrations/pesto.svg",
+    image: "/images/recipes/pesto.jpg",
     description:
       "Albahaca fresca, queso y maní en una salsa aromática que transforma una pasta sencilla.",
     minutes: 10,
@@ -392,7 +392,7 @@ export const recipes: Recipe[] = [
   {
     slug: "panqueques-de-avena",
     title: "Panqueques de avena y banano",
-    image: "/illustrations/panqueques.svg",
+    image: "/images/recipes/panqueques-avena.jpg",
     description: "Suaves y doraditos, con una mezcla de avena y banano que se prepara en el vaso.",
     minutes: 20,
     servings: 4,
